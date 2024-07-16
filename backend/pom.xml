@@ -12,7 +12,7 @@
 	<artifactId>Mhqa</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>Mhqa</name>
-	<description>Gerencia de Distribuidora</description>
+	<description>Gerencia de Prestação de Serviços</description>
 	<properties>
 		<java.version>17</java.version>
 	</properties>
@@ -35,14 +35,14 @@
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
 		</dependency>
-
-                <dependency>
+			<!--
+				<dependency>
                     <groupId>org.springframework.boot</groupId>
                     <artifactId>spring-boot-docker-compose</artifactId>
                     <scope>runtime</scope>
                     <optional>true</optional>
                 </dependency>
-
+				-->
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>

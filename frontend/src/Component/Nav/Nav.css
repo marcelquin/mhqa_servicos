@@ -1,0 +1,100 @@
+.NavBox
+{ 
+    width: 100%;
+    height: auto;
+    display: flex;
+}
+
+.box
+{
+    width: 90px;
+    height: 90px;
+    margin: 20px;
+    text-align: center;
+}
+
+a
+{
+    text-decoration: none;
+    cursor: pointer;
+    font-size: 14px;
+    font-style: oblique;
+    font-weight: 600;
+    color: #00974d;
+}
+span:hover
+{
+    color: #8fbb36;
+}
+span
+{
+    font-size: 14;
+    font-style: oblique;
+    color: #00974d;
+}
+
+.imgCliente
+{
+    width: 60px;
+    height: 50px;
+    background-image: url(../../Imagem/Cliente.png);
+    margin: 0 auto;
+    background-repeat: no-repeat;
+    background-size: auto;
+}
+
+.imgNovaOs
+{
+    width: 60px;
+    height: 50px;
+    background-image: url(../../Imagem/venda.png);
+    margin: 0 auto;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.imgCaixa
+{
+    width: 60px;
+    height: 50px;
+    background-image: url(../../Imagem/caixa.png);
+    margin: 0 auto;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+
+
+.imgServico
+{
+    width: 60px;
+    height: 50px;
+    background-image: url(../../Imagem/servico.png);
+    margin: 0 auto;
+}
+
+.imgOrdemServico
+{
+    width: 60px;
+    height: 50px;
+    background-image: url(../../Imagem/ordemServico.png);
+    margin: 0 auto;
+}
+
+.imgContato
+{
+    width: 60px;
+    height: 50px;
+    background-image: url(../../Imagem/contato.png);
+    background-repeat: no-repeat;
+    background-size: auto;
+    margin: 0 auto;
+}
+
+.imgHome
+{
+    width: 60px;
+    height: 50px;
+    background-image: url(../../Imagem/Home.png);
+    margin: 0 auto;
+}

@@ -1,0 +1,45 @@
+.HeaderBloco
+{
+    width: 100%;
+    height: 200px;
+    display: flex;
+}
+
+.logo
+{
+  width: 30%;
+  height: 120px;
+  margin: 2%;
+  background-image: url(../../Imagem/logo.png);
+  background-repeat: no-repeat;  
+}
+
+.HeaderBlocoNav
+{
+    width: 60%;
+    height: 150px;
+    margin-top: 50px;
+    text-align: end;
+}
+
+.HeaderBlocoNav .btnAdm
+{
+    cursor: pointer;
+    color: blue;
+    font-size: 14px;
+    text-decoration: none;
+}
+
+.HeaderBlocoNav .btnAdm:hover
+{
+    color: green;
+}
+
+.HeaderBlocoNav .areaNav
+{
+    width: 100%;
+    height: 95px;
+    margin-top: 25px;
+}
+
+

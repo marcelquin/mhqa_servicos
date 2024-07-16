@@ -1,7 +1,6 @@
 package App.Entity;
 
 import App.Enum.STATUS;
-import App.Enum.TIPOCOMPRA;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -25,7 +24,7 @@ public class PedidoEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String nomeCLiente;
+    private String nomeCliente;
 
     private String cpfCnpj;
 
@@ -47,9 +46,6 @@ public class PedidoEntity {
     @JoinColumn(name = "pagamentoEntity_id", referencedColumnName = "id")
     private PagamentoEntity pagamento;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "entregaoEntity_id", referencedColumnName = "id")
-    private EntregaEntity entrega;
 
     @OneToMany(cascade = CascadeType.ALL)
     private List<ItemPedidoEntity> produtos;
@@ -60,9 +56,6 @@ public class PedidoEntity {
 
     @Enumerated(EnumType.STRING)
     private STATUS status;
-
-    @Enumerated(EnumType.STRING)
-    private TIPOCOMPRA tipocompra;
 
     private String notificacao;
 

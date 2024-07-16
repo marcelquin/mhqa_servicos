@@ -1,0 +1,17 @@
+.tittle
+{
+    text-transform: uppercase;
+}
+
+span
+{
+    font-size: 14px;
+    margin-left: 10px;
+    text-transform: uppercase;
+}
+
+a
+{
+    cursor: pointer;
+    color: black;
+}

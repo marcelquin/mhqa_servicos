@@ -23,18 +23,12 @@ public class ItemPedidoEntity  {
     private Long id;
 
     @ManyToOne
-    private EstoqueEntity produto;
-
-    private Double quantidade;
+    private ServicoEntity servico;
 
     private Double valorItem;
 
     @JsonFormat(pattern = "dd/MM/yyyy HH:mm")
     private LocalDateTime timeStamp;
 
-    public Double calvalorItem()
-    {
-       return this.produto.getValor() * quantidade;
-    }
 
 }

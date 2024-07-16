@@ -1,0 +1,30 @@
+.cartaoProprietario
+{
+    width: 60%;
+    height: 350px;
+    border: 1px solid black;
+    margin: 30px;
+    border-radius: 20px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;}
+
+.cartaoProprietario .destaque
+{
+
+    width: 98%;
+    margin-left: 2%;
+    height: 150px;
+    font-size: 20px;
+    color: blue;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.cartaoProprietario .info
+{
+
+    width: 99%;
+    margin-left: 1%;
+    height: 200px;
+    font-size: 14px;
+    color: blue;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
