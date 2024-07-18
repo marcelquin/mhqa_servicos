@@ -21,25 +21,26 @@ function Servico() {
 
     return(<>
         <div className="BoxConteudoPagina">
-
+            <div className='conteudoInterno'>
             {APIData.map((data, i)=>{
                                 return(<>
-                                  <div className='cartaoRetorno'>
-                                      <div className='destaque'>
-                                          {data.nome}<br/>
-                                          {data.valorFront}
-                                      </div>
-                                      <div className='Info'>
-                                          {data.nome}<br/>
-                                          {data.descricao}<br/>
-                                          {data.codigo}
-                                          {data.valorFront}<br/>
-                                          {data.maoDeObra}
-                                      </div>
+                                <div className="Retorno">
+                                  <div className="Destaque">
+                                    <div className="infoOs">
+                                      <span>{data.nome}</span><br/>
+                                      <span>({data.valorFront})</span><br/>
                                   </div>
+                                </div>
+                                <div className="infoGeral">
+                                    <span>{data.descricao}</span><br/>
+                                    <span>{data.codigo}</span><br/>
+                                    <span>{data.maoDeObra}</span><br/>
+                                </div>
+                              </div>
                                 </>)
                             })}
 
+        </div>                  
         </div>
     
     

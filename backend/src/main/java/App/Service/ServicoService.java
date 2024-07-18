@@ -80,10 +80,13 @@ public class ServicoService {
                 }
                 else
                 {
-                    Double valorProduto = (valor + maoDeObra)+ valor;
+                    Double valorProduto = valor + maoDeObra;
                     entity.setMaoDeObra(maoDeObra);
                     entity.setValor(valorProduto);
                 }
+                int digito = (int) (10000001 + Math.random() * 89999999);
+                entity.setDescricao(descricao);
+                entity.setCodigo("svc_"+digito);
                 entity.setValorFront(NumberFormat.getCurrencyInstance(localBrasil).format(entity.getValor()));
                 entity.setTimeStamp(LocalDateTime.now());
                 servicoRepository.save(entity);

@@ -90,26 +90,30 @@ function NovaOrdem() {
                         {dadoPesquisaCpf.length > 0?(<>
                             {pesquisacpf.map((data, i)=>{
                             return(<>
-                            <div className="RetornoBox" key={i}>
-                                <div className="retornoInfo">
-                                    <input type="checkbox" onClick={(e)=>{setidCLiente(data.id)}}/>Selecionar<br/>
-                                    <span>{data.nome} {data.sobrenome}</span><br/>
-                                    <span>({data.contato.prefixo}) {data.contato.telefone}</span><br/>
-                                </div>
+                            <div className="Retorno">
+                             <input type='checkbox' onClick={(e)=>{setidCLiente(data.id)}}/>Selecionar
+                              <div className="Destaque">
+                                <div className="infoOs">
+                                  <span>{data.nome} {data.sobrenome}</span><br/><br/>
+                                  <span>({data.contato.prefixo}) {data.contato.telefone}</span><br/>
+                              </div>
+                              </div>
+                              
                             </div>
-                            </>)
+                              </>)
                         })}
                         </>):(<>
                             {APIDataCpf.map((data, i)=>{
                         return(<>
-
-                        <div className="RetornoBox">
-                            <div className="retornoInfo" key={i}>
-                            <input type="checkbox" onClick={(e)=>{setidCLiente(data.id)}}/>Selecionar<br/>
-                                <span>{data.nome} {data.sobrenome}</span><br/>
-                                <span>({data.contato.prefixo}) {data.contato.telefone}</span><br/>
+                            <div className="Retorno">
+                             <input type='checkbox' onClick={(e)=>{setidCLiente(data.id)}}/>Selecionar
+                              <div className="Destaque">
+                                <div className="infoOs">
+                                  <span>{data.nome} {data.sobrenome}</span><br/><br/>
+                                  <span>({data.contato.prefixo}) {data.contato.telefone}</span><br/>
+                              </div>
+                              </div>
                             </div>
-                        </div>
                         </>)
                     })} 
                         </>)}                                     
@@ -125,26 +129,29 @@ function NovaOrdem() {
                         {dadoPesquisaCnpj.length > 0?(<>
                             {pesquisacnpj.map((data, i)=>{
                             return(<>
-                            <div className="RetornoBox" key={i}>
-                                <div className="retornoInfo">
-                                    <input type="checkbox" onClick={(e)=>{setidClienteEmpresa(data.id)}}/>Selecionar<br/>
-                                    <span>{data.nome} {data.sobrenome}</span><br/>
-                                    <span>({data.contato.prefixo}) {data.contato.telefone}</span><br/>
-                                </div>
+                            <div className="Retorno">
+                             <input type='checkbox' onClick={(e)=>{setidClienteEmpresa(data.id)}}/>Selecionar
+                              <div className="Destaque">
+                                <div className="infoOs">
+                                  <span>{data.razaoSocial}</span><br/><br/>
+                                  <span>({data.contato.prefixo}) {data.contato.telefone}</span><br/>
+                              </div>
+                              </div>
                             </div>
                             </>)
                         })}
                         </>):(<>
                             {APIDataCnpj.map((data, i)=>{
                         return(<>
-
-                        <div className="RetornoBox" key={i}>
-                            <div className="retornoInfo">
-                                <input type="checkbox" onClick={(e)=>{setidClienteEmpresa(data.id)}}/>Selecionar<br/>
-                                <span>{data.razaoSocial}</span><br/>
-                                <span>({data.contato.prefixo}) {data.contato.telefone}</span><br/>
+                            <div className="Retorno">
+                             <input type='checkbox' onClick={(e)=>{setidClienteEmpresa(data.id)}}/>Selecionar
+                              <div className="Destaque">
+                                <div className="infoOs">
+                                  <span>{data.razaoSocial}</span><br/><br/>
+                                  <span>({data.contato.prefixo}) {data.contato.telefone}</span><br/>
+                              </div>
+                              </div>
                             </div>
-                        </div>
                         </>)
                     })} 
                         </>)}                                     

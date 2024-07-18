@@ -20,7 +20,10 @@ import OrdemServicoAdmGerencia from './Page/Adm/OrdemServiço/OrdemServicoAdmGer
 import ProietarioAdmGerencia from './Page/Adm/Proproetario/ProrpietarioAdmGerencia.js';
 
 import AdicionarServico from './Page/OrdemServiço/AdicionarServico.js';
-
+import AdmServicoEditar from './Page/Adm/Serviços/ServicoAdmEditar.js';
+import CLienteEditar from './Page/Adm/Cliente/ClienteEditar.js';
+import ClienteEmpresaEditar from './Page/Adm/Cliente/ClienteEmpresaEditar.js'
+import EmpresaEditar from './Page/Adm/Proproetario/EmpresaEditar.js'
 function App() {
   return (
       <div className="background">
@@ -47,6 +50,11 @@ function App() {
                           <Route path='/ProprietarioGerencia' element={<ProietarioAdmGerencia/>}/>
                       
                           <Route path='/adicionaritem/:id' element={<AdicionarServico/>} />
+                          <Route path='/servicoeditar/:id' element={<AdmServicoEditar/>} />
+                          <Route path='/clienteeditar/:id' element={<CLienteEditar/>} />
+                          <Route path='/clienteempresaeditar/:id' element={<ClienteEmpresaEditar/>} />
+                          <Route path='/empresaeditar/:id' element={<EmpresaEditar/>} />
+
 
 
                       </Routes>

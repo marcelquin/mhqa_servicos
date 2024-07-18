@@ -56,37 +56,39 @@ function AdicionarServico() {
                         {dadoPesquisa.length > 0 ?(<>
                             {pesquisa.map((data, i)=>{
                                 return(<>
-                                    <div className='cartaoRetorno'>
-                                        <input type='checkbox' onClick={(e)=>{setidServico(data.id)}}/>Selecionar
-                                        <div className='destaque'>
-                                            {data.nome}<br/>
-                                            {data.valorFront}
-                                        </div>
-                                        <div className='Info'>
-                                            {data.nome}<br/>
-                                            {data.descricao}<br/>
-                                            {data.codigo}
-                                            {data.valorFront}<br/>
-                                            {data.maoDeObra}
-                                        </div>
-                                    </div>
+
+                    <div className="Retorno">
+                             <input type='checkbox' onClick={(e)=>{setidServico(data.id)}}/>Selecionar
+                              <div className="Destaque">
+                                <div className="infoOs">
+                                  <span>{data.nome}</span><br/>
+                              </div>
+                            </div>
+                            <div className="infoGeral">
+                                <span>{data.descricao}</span><br/>
+                                <span>{data.codigo}</span><br/>
+                                <span>{data.valorFront}</span><br/>
+                                <span>{data.maoDeObra}</span><br/>
+                            </div>
+                     </div>
                                 </>)
                             })}
                         </>):(<>
                             {ApiServico.map((data, i)=>{
                                 return(<>
-                                    <div className='cartaoRetorno'>
+                                    <div className="Retorno">
                                         <input type='checkbox' onClick={(e)=>{setidServico(data.id)}}/>Selecionar
-                                        <div className='destaque'>
-                                            {data.nome}<br/>
-                                            {data.valorFront}
+                                        <div className="Destaque">
+                                            <div className="infoOs">
+                                            <span>{data.nome}</span><br/>
+                                            <span>{data.valorFront}</span><br/>
                                         </div>
-                                        <div className='Info'>
-                                            {data.nome}<br/>
-                                            {data.descricao}<br/>
-                                            {data.codigo}
-                                            {data.valorFront}<br/>
-                                            {data.maoDeObra}
+                                        </div>
+                                        <div className="infoGeral">
+                                            <span>{data.descricao}</span><br/>
+                                            <span>{data.codigo}</span><br/>
+                                            <span>{data.valorFront}</span><br/>
+                                            <span>{data.maoDeObra}</span><br/>
                                         </div>
                                     </div>
                                 </>)

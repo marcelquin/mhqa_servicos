@@ -40,35 +40,37 @@ function Cliente() {
             {filtroCadastro.length ===3?(<>
                 {APIDataCpf.map((data, i)=>{
                     return(<>
-                        <div className='clienteBoxRetorno' key={i}>
-                    <div className='infoDestaque'>
-                        <span>{data.nome} {data.sobrenome} </span><br/>
-                        <span>({data.contato.prefixo}) {data.contato.telefone}</span>
-                    </div>
-                    <div className='info'>
-                        <span>
-                            {data.endereco.logradouro}, {data.endereco.numero}, {data.endereco.bairro}, {data.endereco.referencia}, {data.endereco.cep}, {data.endereco.cidade}, {data.endereco.estado}
-                        </span><br/>
-                    </div>
-                </div>
+                    
+                    <div className="Retorno">
+                              <div className="Destaque">
+                                <div className="infoOs">
+                                  <span>{data.nome} {data.sobrenome}</span><br/>
+                              </div>
+                            </div>
+                            <div className="infoGeral">
+                            <span>({data.contato.prefixo}) {data.contato.telefone}</span><br/>
+                            <span>{data.endereco.logradouro}, {data.endereco.numero}, {data.endereco.bairro}, {data.endereco.referencia}, {data.endereco.cep}, {data.endereco.cidade}, {data.endereco.estado}</span>
+                            <span>{data.contato.email}</span>
+                            </div>
+                     </div>
+
                     </>)
                 })}
                 
             </>):(<>
                 {APIDataCnpj.map((data, i)=>{
                     return(<>
-                    <div className='clienteBoxRetorno' key={i}>
-                    <div className='infoDestaque'>
-                    <span>{data.razaoSocial}</span><br/>
-                        <span>({data.contato.prefixo}) {data.contato.telefone}</span>
-                    </div>
-                    <div className='info'>
-                        <span>{data.cnpj}</span><br/>
-                        <span>
-                            {data.endereco.logradouro}, {data.endereco.numero}, {data.endereco.bairro}, {data.endereco.referencia}, {data.endereco.cep}, {data.endereco.cidade}, {data.endereco.estado}
-                        </span><br/>
-                    </div>
-                </div>
+                        <div className="Retorno">
+                              <div className="Destaque">
+                                <div className="infoOs">
+                                  <span>{data.nome} {data.sobrenome}</span><br/>
+                              </div>
+                            </div>
+                            <div className="infoGeral">
+                            <span>({data.contato.prefixo}) {data.contato.telefone}</span><br/>
+                            <span>{data.endereco.logradouro}, {data.endereco.numero}, {data.endereco.bairro}, {data.endereco.referencia}, {data.endereco.cep}, {data.endereco.cidade}, {data.endereco.estado}</span>
+                            </div>
+                        </div>
                     </>)
                 })}
                 

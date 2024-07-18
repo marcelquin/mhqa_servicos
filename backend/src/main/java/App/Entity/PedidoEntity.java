@@ -46,7 +46,6 @@ public class PedidoEntity {
     @JoinColumn(name = "pagamentoEntity_id", referencedColumnName = "id")
     private PagamentoEntity pagamento;
 
-
     @OneToMany(cascade = CascadeType.ALL)
     private List<ItemPedidoEntity> produtos;
 

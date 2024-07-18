@@ -1,30 +1,111 @@
 .cartaoProprietario
 {
     width: 60%;
-    height: 350px;
-    border: 1px solid black;
-    margin: 30px;
+    height: 380px;
+    display: flex;
+    margin: 0 auto;
     border-radius: 20px;
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;}
+    background-image: url(../../../Imagem/cartaoBackground.png);
+    background-size: cover;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+}
 
-.cartaoProprietario .destaque
+.btnEditar
 {
+    font-size: 16px;
+    font-style: oblique;
+    font-weight: 700;
+}
 
-    width: 98%;
-    margin-left: 2%;
-    height: 150px;
-    font-size: 20px;
-    color: blue;
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+.btnEditar:hover
+{
+    color: green;
 }
 
 .cartaoProprietario .info
 {
-
-    width: 99%;
-    margin-left: 1%;
-    height: 200px;
+    width: 75%;
+    height: 100%;
     font-size: 14px;
-    color: blue;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.info .nome
+{
+    width: 100%;
+    height: 150px;
+    text-align: center;
+    font-size: 20px;
+    margin: 0 auto;
+}
+
+.info .infoGeral
+{
+    width: 100%;
+    height: 230px;  
+}
+
+.infoGeral .blocoInfo
+{
+    width: 100%;
+    height: 60px;
+    display: flex;
+    text-align: center;
+}
+
+.blocoInfo .topico
+{
+    width: 20px;
+    height: 20px;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.topicoLocalizacao
+{
+    background-image: url(../../../Imagem/localizacao.png);
+}
+
+.topicoEmail
+{
+    background-image: url(../../../Imagem/email.png);
+}
+
+.topicoTelefone
+{
+    background-image: url(../../../Imagem/telefone.png);
+}
+
+.blocoInfo .texto
+{
+    text-align: center;
+}
+
+.texto span
+{
+    font-size: 14px;
+}
+
+.cartaoProprietario .destaque
+{
+    text-transform: uppercase;
+    width: 25%;
+    height: 100%;
+    font-size: 20px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.destaque h2
+{
+    font-size: 18px;
+    margin-top: 50%;
+    margin-left: 10%;
+    text-align: justify;
+}
+
+.destaque span
+{
+    font-size: 12px;
+    text-transform: uppercase;
+    text-align: justify;
 }

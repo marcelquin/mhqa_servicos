@@ -3,6 +3,7 @@ import '../AdmGlobal.css'
 import NavAdm from '../../../Component/NavAdm/NavAdm'
 import { useEffect, useState } from 'react'
 import Axios from 'axios';
+import { Link } from 'react-router-dom';
 
 
 export default function AdmServicoGerencia()
@@ -12,6 +13,10 @@ export default function AdmServicoGerencia()
   //const baseUrl = "http://34.133.121.3:8080"
   const baseUrl = "http://localhost:8080"
   const[APIData, setAPIData]= useState([]);
+  const[dadoPesquisa, setdadoPesquisa] = useState('')
+  const pesquisa = dadoPesquisa.length > 0 ?
+  APIData.filter(dados => dados.nome.includes(dadoPesquisa)) :
+  [];
 
   useEffect(() => {
     Axios
@@ -29,35 +34,73 @@ export default function AdmServicoGerencia()
                     <NavAdm></NavAdm>
                 </div>
                 <div className='conteudoGeral'>
-                  <div className='campoPesquisa'>
-                        <label>Nome:<br/>
-                        <input type="text" name="dadoPesquisa" className="inputPesquisa" placeholder="Digite o Nome para busca" />
-                        </label>
-                  </div>
-                  <div className='conteudoInterno'>
-                            {APIData.map((data, i)=>{
+                           <div className='campoPesquisa'>
+                              <label>Nome:<br/>
+                              <input type="text" name="dadoPesquisacpf" className="inputPesquisa" onChange={e=> setdadoPesquisa(e.target.value)} placeholder="Digite o Nome para busca" />
+                              </label>
+                           </div>
+                           <div className='conteudoInterno'>
+
+                            {dadoPesquisa.length > 0 ?(<>
+                              
+                              {pesquisa.map((data, i)=>{
                                 return(<>
-                                    <div className='cartaoRetorno' key={i}>
-                                 <div className='destaque'>
-                                    {data.nome}<br/>
-                                    {data.valorFront}
-                                 </div>
-                                 <div className='Info'>
-                                    {data.nome}<br/>
+
+                                    <div className="Retorno"> 
+                                    <span><Link to={`/servicoeditar/${data.id}`}> Editar</Link></span> 
+
+                                          <div className="Destaque">
+                                          <div className="info">
+                                             <span>{data.nome}</span><br/>
+                                             <span> {data.valorFront}</span><br/>
+                                          </div>
+                                       </div>
+                                       <div className="infoGeral">
+                                       {data.nome}<br/>
+                                      {data.descricao}<br/>
+                                      {data.codigo}
+                                      {data.valorFront}<br/>
+                                      {data.maoDeObra}
+                                       </div>
+
+                                    </div>
+                                </>)
+                            })}
+                        
+                            </>):(<>
+                              {APIData.map((data, i)=>{
+                              return(<>
+
+                                  <div className="Retorno"> 
+                                  <span><Link to={`/servicoeditar/${data.id}`}> Editar</Link></span> 
+
+                                        <div className="Destaque">
+                                        <div className="info">
+                                           <span>{data.nome}</span><br/>
+                                           <span> {data.valorFront}</span><br/>
+                                        </div>
+                                     </div>
+                                     <div className="infoGeral">
+                                     {data.nome}<br/>
                                     {data.descricao}<br/>
                                     {data.codigo}
                                     {data.valorFront}<br/>
                                     {data.maoDeObra}
-                                 </div>
-                           </div>
-                                </>)
-                            })}
-                            
-                  </div>
-                </div>
-         </div>
-                    
-    
+                                     </div>
+
+                                  </div>
+                              </>)
+                          })}
+                            </>)}
+
+                            </div>
+
+
+
+
+                          
+                  </div>  
+                </div>  
     </>)
 }
 

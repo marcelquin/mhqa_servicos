@@ -1,4 +1,4 @@
-import '../PageGlobal.css'
+
 import './Caixa.css'
 import { useEffect, useState } from 'react'
 import Axios from 'axios';
@@ -96,42 +96,60 @@ const handleChanage = (e) => {
                 </div>
 
                 <div className="retornoInfo">
-                <table>
-                  <tr>
-                    <td>Selecionar</td>
-                    <td>Cliente</td>
-                    <td>Código OS</td>
-                    <td>Valor</td>
-                    <td>Data</td>
-                  </tr>
                   {dadoPesquisa.length > 0 ? (<>
                     {pesquisa.map((data, i)=>{
                       return(<>
-                        <tr key={i}>
-                          <td><input type='checkbox' onClick={(e)=>{setidPost(data.id)}} /></td>
-                          <td>{data.nomeCliente}</td>
-                          <td>{data.codigo}</td>
-                          <td>{data.valorTotalFront}</td>
-                          <td>{data.dataPedido}</td>
-                        </tr>
+                        <div className="Retorno">
+                              <td><input type='checkbox' onClick={(e)=>{setidPost(data.id)}} />Selecionar</td>
+                              <div className="Destaque">
+                                <div className="infoOs">
+                                  <span>{data.nomeCliente}</span><br/>
+                                  <span>{data.valorTotalFront}</span><br/>
+                                  <span>{data.codigo}</span>
+                                  <span>{data.status}</span>
+                              </div>
+                            </div>
+                            <div className="infoGeral">
+                            <span>{data.dataPedido}</span><br/>
+                            {data.produtos.map((data, i)=>{
+                            return(<>
+                                <span>{data.nome}</span><br/>
+                            </>)
+                          })}                           
+                            </div>
+                         </div>
                       </>)
                     })}
                     
                 </>):(<>
                   {APIData.map((data, i)=>{
                     return(<>
-                      <tr key={i}>
-                        <td><input type='checkbox' onClick={(e)=>{setidPost(data.id)}} /></td>
-                        <td>{data.nomeCliente}</td>
-                        <td>{data.codigo}</td>
-                        <td>{data.valorTotalFront}</td>
-                        <td>{data.dataPedido}</td>
-                      </tr>
+
+                            <div className="Retorno">
+                              <td><input type='checkbox' onClick={(e)=>{setidPost(data.id)}} />Selecionar</td>
+                              <div className="Destaque">
+                                <div className="info">
+                                  <span>{data.nomeCliente}</span><br/>
+                                  <span>{data.valorTotalFront}</span><br/>
+                                  <span>{data.codigo}</span>
+                                  <span>{data.dataPedido}</span><br/>
+                                  <span>{data.status}</span>
+                              </div>
+                            </div>
+                            <div className="infoGeral">
+                              {data.produtos.map((data, i)=>{
+                                return(<>
+                                    <span>{data.nome} {data.codigo}</span><br/>
+                                </>)
+                              })}
+                            </div>
+                         </div>
+
                   </>)
                   })}
                   
                 </>)}
-                </table>
+                
                 </div>
 
             </div>

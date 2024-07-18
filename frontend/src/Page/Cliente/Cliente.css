@@ -1,6 +1,5 @@
 .clienteBoxRetorno
 {
-    border: 1px solid brown;
     width: 200px;
     height: 200px;
     margin: 20px;
@@ -26,31 +25,51 @@
     display: flex;
 }
 
-.clienteBoxRetorno .infoDestaque
+.Retorno
 {
-    border: 1px solid cadetblue;
-    width: 100%;
+
+    width: 250px;
+    height: 250px;
+    margin: 10px;
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+}
+
+.Retorno .Destaque
+{
+    display: flex;
+    background-color: rgb(146, 155, 235); 
+    margin-bottom: 3px;
+}
+
+.Destaque span
+{
+    color: black;
+    margin: 1px;
+}
+
+.Retorno .infoOs
+{
+
+    width: 180px;
     height: 90px;
+    margin-top: 10px;
 }
 
-.infoDestaque span
+.infoOs .infoOsDados
 {
-    color: goldenrod;
-    font-size: 14px;
-    text-transform: uppercase;
-    margin: 5px;
+    color: rgb(7, 7, 7);
 }
 
-.clienteBoxRetorno .info
+.Retorno .infoGeral
 {
-    width: 100%;
-    height: 110px;
+
+    height: 175px;
+    width: 240px;
+    margin-left: 5px;
 }
 
-.info span
+.infoGeral span
 {
-    color: aqua;
-    font-size: 12px;
-    margin: 3px;
+    color: black;
 }
 

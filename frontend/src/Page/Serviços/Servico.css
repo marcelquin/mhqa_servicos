@@ -1,3 +1,9 @@
+.BoxConteudoPagina
+{
+    width: 100%;
+    height: auto;
+}
+
 .servicoBoxRetorno
 {
     border: 1px solid brown;
@@ -29,7 +35,6 @@
 
 .info span
 {
-    color: aqua;
     font-size: 12px;
     margin: 3px;
 }

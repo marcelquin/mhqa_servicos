@@ -43,11 +43,11 @@ function Home() {
 
                         <div className="infoGeral">
                             <span>{data.dataPedido}</span><br/>
-                            {data.produtos.map((item, i)=> {
-                                return(<>
-                                    <span>{data.nome}</span><br/>
-                                </>)
-                            })}
+                            {data.produtos.map((data, i)=>{
+                            return(<>
+                                <span>{data.nome}</span><br/>
+                            </>)
+                          })}
                         </div>
 
                     </div>

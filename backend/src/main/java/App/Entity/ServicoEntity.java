@@ -1,6 +1,5 @@
 package App.Entity;
 
-import App.Enum.MEDIDA;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -28,9 +27,6 @@ public class ServicoEntity {
 
     @JoinColumn(unique = true)
     private String codigo;
-
-    @Enumerated(EnumType.STRING)
-    private MEDIDA medida;
 
     private Double valor;
 

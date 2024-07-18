@@ -184,6 +184,7 @@ public class PedidoService {
                 Locale localBrasil = new Locale("pt", "BR");
                 ItemPedidoEntity itemPedido = new ItemPedidoEntity();
                 itemPedido.setServico(servico);
+                itemPedido.setNome(servico.getNome());
                 itemPedido.setValorItem(servico.getValor());
                 itemPedido.setTimeStamp(LocalDateTime.now());
                 itemPedidoRepository.save(itemPedido);

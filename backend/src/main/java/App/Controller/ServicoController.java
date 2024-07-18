@@ -2,7 +2,6 @@ package App.Controller;
 
 import App.DTO.ServicoDTO;
 import App.Entity.ServicoEntity;
-import App.Enum.MEDIDA;
 import App.Service.ServicoService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
