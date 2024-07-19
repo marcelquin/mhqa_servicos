@@ -28,6 +28,10 @@ public class PedidoEntity {
 
     private String cpfCnpj;
 
+    private String relato;
+
+    private String telefone;
+
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "pedidoEntity_clienteEntity_id")
     private ClienteEntity Cliente;
@@ -41,6 +45,9 @@ public class PedidoEntity {
 
     @JsonFormat(pattern = "dd/MM/yyyy HH:mm")
     private LocalDateTime dataPedido;
+
+    @JsonFormat(pattern = "dd/MM/yyyy HH:mm")
+    private LocalDateTime dataPagamento;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "pagamentoEntity_id", referencedColumnName = "id")

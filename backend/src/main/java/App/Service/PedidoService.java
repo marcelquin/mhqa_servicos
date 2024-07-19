@@ -100,21 +100,26 @@ public class PedidoService {
 
     public ResponseEntity<PedidoDTO> NovoVenda(Long idCliente,
                                                Long idClienteEmpresa,
-                                                String clienteNome)
+                                               String clienteNome,
+                                               Long prefixo,
+                                               Long telefone,
+                                               String relatoProblema)
     {
         try
         {
+            if(relatoProblema == null){throw  new NullargumentsException();}
             if(idCliente == null && idClienteEmpresa == null && clienteNome == null){throw new NullargumentsException();}
             PedidoEntity entity = new PedidoEntity();
             if(idCliente != null)
             {
-
                 ClienteEntity cliente = clienteRepository.findById(idCliente).orElseThrow(
                         ()-> new EntityNotFoundException()
                 );
                 entity.setCliente(cliente);
                 entity.setNomeCliente(cliente.getNome()+" "+cliente.getSobrenome());
                 entity.setCpfCnpj(cliente.getCpf());
+                entity.setRelato(relatoProblema);
+                entity.setTelefone("("+cliente.getContato().getPrefixo()+") "+cliente.getContato().getTelefone());
                 int dig = (int) (1111 + Math.random() * 9999);
                 entity.setTimeStamp(LocalDateTime.now());
                 entity.setDataPedido(LocalDateTime.now());
@@ -134,6 +139,8 @@ public class PedidoService {
                 entity.setClienteEmpresa(clienteEmpresa);
                 entity.setNomeCliente(clienteEmpresa.getRazaoSocial());
                 entity.setCpfCnpj(clienteEmpresa.getCnpj());
+                entity.setRelato(relatoProblema);
+                entity.setTelefone("("+clienteEmpresa.getContato().getPrefixo()+") "+clienteEmpresa.getContato().getTelefone());
                 int dig = (int) (1111 + Math.random() * 9999);
                 entity.setTimeStamp(LocalDateTime.now());
                 entity.setDataPedido(LocalDateTime.now());
@@ -150,6 +157,7 @@ public class PedidoService {
                 int dig = (int) (1111 + Math.random() * 9999);
                 entity.setTimeStamp(LocalDateTime.now());
                 entity.setNomeCliente(clienteNome);
+                entity.setTelefone("("+prefixo+") "+telefone);
                 entity.setDataPedido(LocalDateTime.now());
                 entity.setValorTotal(0.0);
                 entity.setValorTotalFront(NumberFormat.getCurrencyInstance(localBrasil).format(entity.getValorTotal()));
@@ -227,6 +235,7 @@ public class PedidoService {
                 pagamento.setTimeStamp(LocalDateTime.now());
                 pagamentoRepository.save(pagamento);
                 entity.setStatus(STATUS.PAGO);
+                entity.setDataPagamento(LocalDateTime.now());
                 entity.setPagamento(pagamento);
                 pedidoRepository.save(entity);
             }

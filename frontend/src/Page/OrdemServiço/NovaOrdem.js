@@ -13,6 +13,9 @@ function NovaOrdem() {
     const [idCLiente, setidCLiente] = useState('')
     const [idClienteEmpresa, setidClienteEmpresa] = useState('')
     const [nomeCLiente, setnomeCLiente] = useState('')
+    const [relatoProblema, setrelatoProblema] = useState('')
+    const [prefixo, setprefixo] = useState('')
+    const [telefone, settelefone] = useState('')
     const[APIDataCpf, setAPIDataCpf]= useState([]);
     const[APIDataCnpj, setAPIDataCnpj]= useState([]);
     const[dadoPesquisaCpf, setdadoPesquisaCpf] = useState('')
@@ -34,14 +37,20 @@ function NovaOrdem() {
             body: new URLSearchParams({
                 'idCliente': idCLiente,
                 'idClienteEmpresa': idClienteEmpresa,
-                'clienteNome':nomeCLiente
+                'clienteNome':nomeCLiente,
+                'prefixo': prefixo,
+                'telefone': telefone,
+                'relatoProblema': relatoProblema
         })})
         .then(navegate("/"))  
         setidCLiente('');
         setidClienteEmpresa('')
         setdadoPesquisaCpf('')
         setdadoPesquisaCnpj('')
-        setnomeCLiente('')   
+        setnomeCLiente('')
+        setrelatoProblema('')
+        settelefone('')
+        setprefixo('')   
         }catch (err){
           console.log("erro")
         }
@@ -78,9 +87,20 @@ function NovaOrdem() {
 
                 {filtroCadastro.length === 3?(<>
                     
-                    <div className="campoPesquisa">
-                        <label>Nome:<br/>
+                    <div className="campoPesquisaNovaOs">
+                        <label>Nome:
                         <input type="text" name="dadoPesquisacpf" className="inputPesquisa" onChange={e=> {setdadoPesquisaCpf(e.target.value); setnomeCLiente(e.target.value)}} placeholder="Digite o Nome para busca" />
+                        </label>
+                        <br/>
+                        <label>prefixo:
+                        <input type="number" name="prefixo" className="inputPesquisa" onChange={e=> {setprefixo(e.target.value)}} placeholder="99" />
+                        </label>
+                        <label>telefone:
+                        <input type="number" name="telefone" className="inputPesquisa" onChange={e=> {settelefone(e.target.value)}} placeholder="999999999" />
+                        </label>
+                        <br/>
+                        <label>Problema Relatado:<br/>
+                        <input type="text" name="relatoProblema" className="inputPesquisa" onChange={e=> {setrelatoProblema(e.target.value)}} placeholder="Digite o defeito inicial" />
                         </label>
                         <input type='submit' value="Iniciar OS" onClick={NovaOrdemServico} />
                     </div>
@@ -119,9 +139,20 @@ function NovaOrdem() {
                         </>)}                                     
                     </div>               
                 </>):(<>
-                    <div className="campoPesquisa">
-                        <label>Nome:<br/>
-                        <input type="text" name="dadoPesquisacnpj" className="inputPesquisa" onChange={e=> {setdadoPesquisaCnpj(e.target.value); setnomeCLiente(e.target.value)}} placeholder="Digite o Nome para busca" />
+                    <div className="campoPesquisaNovaOs">
+                    <label>Nome:
+                        <input type="text" name="dadoPesquisacpf" className="inputPesquisa" onChange={e=> {setdadoPesquisaCpf(e.target.value); setnomeCLiente(e.target.value)}} placeholder="Digite o Nome para busca" />
+                        </label>
+                        <br/>
+                        <label>prefixo:
+                        <input type="number" name="prefixo" className="inputPesquisa" onChange={e=> {setprefixo(e.target.value)}} placeholder="99" />
+                        </label>
+                        <label>telefone:
+                        <input type="number" name="telefone" className="inputPesquisa" onChange={e=> {settelefone(e.target.value)}} placeholder="999999999" />
+                        </label>
+                        <br/>
+                        <label>Problema Relatado:<br/>
+                        <input type="text" name="relatoProblema" className="inputPesquisa" onChange={e=> {setrelatoProblema(e.target.value)}} placeholder="Digite o defeito inicial" />
                         </label>
                         <input type='submit' value="Iniciar OS" onClick={NovaOrdemServico} />
                     </div>

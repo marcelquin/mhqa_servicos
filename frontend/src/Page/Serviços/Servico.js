@@ -32,9 +32,9 @@ function Servico() {
                                   </div>
                                 </div>
                                 <div className="infoGeral">
-                                    <span>{data.descricao}</span><br/>
-                                    <span>{data.codigo}</span><br/>
-                                    <span>{data.maoDeObra}</span><br/>
+                                    <span>Descrição: {data.descricao}</span><br/><br/>
+                                    <span>Código: {data.codigo}</span><br/><br/>
+                                    <span>Mão de Obra: {data.maoDeObra}</span><br/>
                                 </div>
                               </div>
                                 </>)

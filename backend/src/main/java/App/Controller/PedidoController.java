@@ -70,8 +70,11 @@ public class PedidoController {
     @PostMapping("/NovoVenda")
     public ResponseEntity<PedidoDTO> NovoVenda(Long idCliente,
                                                Long idClienteEmpresa,
-                                                String clienteNome)
-    { return service.NovoVenda(idCliente,idClienteEmpresa,clienteNome);}
+                                               String clienteNome,
+                                               Long prefixo,
+                                               Long telefone,
+                                               @RequestParam String relatoProblema)
+    { return service.NovoVenda(idCliente,idClienteEmpresa,clienteNome,prefixo,telefone, relatoProblema);}
 
     @Operation(summary = "Edita Registro na tabela", method = "PUT")
     @ApiResponses(value = {

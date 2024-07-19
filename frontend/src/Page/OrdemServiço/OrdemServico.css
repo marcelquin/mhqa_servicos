@@ -3,6 +3,10 @@
     width: 100%;
     height: auto;
 }
+.campoPesquisaNovaOs
+{
+
+}
 
 .boxAdicionar .adicionarFormPesquisa
 {
@@ -23,6 +27,12 @@
     height: 20px;
     width: 80px;
     border-radius: 10px;
+}
+
+.conteudoInterno
+{
+    width: 100%;
+    height: auto;
 }
 
 .boxAdicionar .adicionarRetornoInfo

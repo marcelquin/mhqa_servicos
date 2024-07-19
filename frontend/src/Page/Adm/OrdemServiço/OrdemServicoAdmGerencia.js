@@ -42,7 +42,7 @@ export default function OrdemServicoAdmGerencia()
                         <td>Data</td>
                         <td>Serviços</td>
                         <td>Valor</td>
-                        <td>Status Pagamento</td>
+                        <td>Status</td>
                         <td>Data Pagamento</td>
                       </tr>
                       {APIData.map((data, i)=>{
@@ -52,9 +52,16 @@ export default function OrdemServicoAdmGerencia()
                           <td>{data.relato}</td>
                           <td>{data.codigo}</td>
                           <td>{data.dataPedido}</td>
+                          <td>
+                          {data.produtos.map((data, i)=>{
+                            return(<>
+                                <span>{data.nome}, </span>
+                            </>)
+                          })}
+                          </td>
                           <td>{data.valorTotalFront}</td>
                           <td>{data.status}</td>
-                          <td>editar</td>
+                          <td>{data.dataPagamento}</td>
                           </tr>
 
                         </>)
