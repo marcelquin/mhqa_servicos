@@ -7,8 +7,8 @@ import { useNavigate } from 'react-router-dom';
 export default function AdmClienteCad()
 {
     //onChange={e=> setdadoPesquisaCpf(e.target.value)}
-    //const baseUrl = "http://34.133.121.3:8080"
-    const baseUrl = "http://localhost:8080"
+    const baseUrl = "http://34.28.64.143:8080"
+    //const baseUrl = "http://localhost:8080"
     const[filtroCadastro, setfiltroCadastro] = useState('')
     const navigate = useNavigate();
     const [clienteData, setclienteData] = useState({

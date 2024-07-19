@@ -6,8 +6,8 @@ import { useNavigate } from 'react-router-dom';
 
 export default function ProietarioAdmCad()
 {
-    //const baseUrl = "http://34.133.121.3:8080"
-    const baseUrl = "http://localhost:8080"
+  const baseUrl = "http://34.28.64.143:8080"
+  //const baseUrl = "http://localhost:8080"
     const navigate = useNavigate();
     const [PostData, setPostData] = useState({
       nome: "",

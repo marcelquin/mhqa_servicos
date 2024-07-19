@@ -7,8 +7,8 @@ import Axios from 'axios';
 
 function AdicionarServico() {
     
-    //const baseUrl = "http://34.133.121.3:8080"
-    const baseUrl = "http://localhost:8080"
+  const baseUrl = "http://34.28.64.143:8080"
+  //const baseUrl = "http://localhost:8080"
     const {id} = useParams()
     const[idServico, setidServico] = useState('')
     const navigate = useNavigate();

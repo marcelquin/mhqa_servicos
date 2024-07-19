@@ -4,8 +4,8 @@ import Axios from 'axios';
 
 function Cliente() {
 
-    //const baseUrl = "http://34.133.121.3:8080"
-    const baseUrl = "http://localhost:8080"
+  const baseUrl = "http://34.28.64.143:8080"
+  //const baseUrl = "http://localhost:8080"
     const [filtroCadastro, setfiltroCadastro] = useState('')
     const[APIDataCpf, setAPIDataCpf]= useState([]);
     const[APIDataCnpj, setAPIDataCnpj]= useState([]);
