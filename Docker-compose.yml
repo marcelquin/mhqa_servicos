@@ -8,7 +8,7 @@ services:
     ports:
       - 8080:8080
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://database:5432/db_aplhaMinicommerce
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://database:5432/db_mhqa_service
       - SPRING_DATASOURCE_USERNAME=admin
       - SPRING_DATASOURCE_PASSWORD=mh8q23pr99
       - SPRING_JPA_HIBERNATE_DDL_AUTO=update
@@ -21,7 +21,7 @@ services:
   database:
     image: 'postgres'
     environment:
-      - 'POSTGRES_DB=db_aplhaMinicommerce'
+      - 'POSTGRES_DB=db_mhqa_service'
       - 'POSTGRES_PASSWORD=mh8q23pr99'
       - 'POSTGRES_USER=admin'
     ports:
@@ -30,13 +30,13 @@ services:
       - /app/database/postgre 
 
 
-  #frontend:
-  #  build: /frontend
-  #  ports:
-  #    - 3000:3000
-  #  depends_on:
-  #    - backend
-  #  restart: on-failure
+  frontend:
+    build: /frontend
+    ports:
+      - 3000:3000
+    depends_on:
+      - backend
+    restart: on-failure
   
     
     
