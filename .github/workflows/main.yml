@@ -34,6 +34,6 @@ jobs:
         with:   
           context: ./frontend
           push: true
-          tags: ${{ secrets.DOCKERHUB_USER }}/mhqaservicefrontend:v1
+          tags: ${{ secrets.DOCKERHUB_USER }}/mhqaservicefrontend:v2
           #tags: ${{ secrets.DOCKERHUB_USER }}/mhqaservicefrontend:latest
  
