@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 export default function AdmServicoEditar()
 {
-  const baseUrl = "http://34.27.64.127:8080"
+  const baseUrl = "http://34.135.105.123:8080"
   //const baseUrl = "http://localhost:8080"
     const navigate = useNavigate();
     const {id} = useParams()
