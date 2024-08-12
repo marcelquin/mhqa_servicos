@@ -29,6 +29,8 @@ public class PagamentoEntity {
 
     private Double valor;
 
+    private Double valorParcela;
+
     @JsonFormat(pattern = "dd/MM/yyyy HH:mm")
     private LocalDateTime dataPagamento;
 

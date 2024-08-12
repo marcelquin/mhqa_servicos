@@ -7,14 +7,15 @@ import App.Enum.STATUS;
 import App.Exceptions.EntityNotFoundException;
 import App.Exceptions.IllegalActionException;
 import App.Exceptions.NullargumentsException;
+import App.Financeiro.Entity.*;
+import App.Financeiro.Service.RelatorioMensalService;
 import App.Repository.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.awt.*;
-import java.text.DecimalFormat;
 import java.text.NumberFormat;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,15 +30,20 @@ public class PedidoService {
     private final ItemPedidoRepository itemPedidoRepository;
     private final PagamentoRepository pagamentoRepository;
     private final ClienteEmpresaRepository clienteEmpresaRepository;
+    private final RelatorioMensalService relatorioMensalService;
+
     Locale localBrasil = new Locale("pt", "BR");
-    public PedidoService(ClienteRepository clienteRepository, ServicoRepository servicoRepository, PedidoRepository pedidoRepository, ItemPedidoRepository itemPedidoRepository, PagamentoRepository pagamentoRepository,ClienteEmpresaRepository clienteEmpresaRepository) {
+
+    public PedidoService(ClienteRepository clienteRepository, ServicoRepository servicoRepository, PedidoRepository pedidoRepository, ItemPedidoRepository itemPedidoRepository, PagamentoRepository pagamentoRepository, ClienteEmpresaRepository clienteEmpresaRepository, RelatorioMensalService relatorioMensalService) {
         this.clienteRepository = clienteRepository;
         this.servicoRepository = servicoRepository;
         this.pedidoRepository = pedidoRepository;
         this.itemPedidoRepository = itemPedidoRepository;
         this.pagamentoRepository = pagamentoRepository;
         this.clienteEmpresaRepository = clienteEmpresaRepository;
+        this.relatorioMensalService = relatorioMensalService;
     }
+
 
     public ResponseEntity<List<PedidoEntity>> ListarVendas()
     {
@@ -125,7 +131,7 @@ public class PedidoService {
                 entity.setDataPedido(LocalDateTime.now());
                 entity.setValorTotal(0.0);
                 entity.setValorTotalFront(NumberFormat.getCurrencyInstance(localBrasil).format(entity.getValorTotal()));
-                entity.setCodigo("Pd_"+dig);
+                entity.setCodigo("OS_"+dig);
                 entity.setStatus(STATUS.AGUARDANDO);
                 pedidoRepository.save(entity);
                 PedidoDTO response = new PedidoDTO(entity.getCodigo(),entity.getCliente().getNome(),null,entity.getValorTotalFront(),entity.getPagamento().getFormaPagamento(), entity.getPagamento().getDataPagamento());
@@ -233,11 +239,13 @@ public class PedidoService {
                 pagamento.setValor(entity.getValorTotal());
                 pagamento.setDataPagamento(LocalDateTime.now());
                 pagamento.setTimeStamp(LocalDateTime.now());
-                pagamentoRepository.save(pagamento);
                 entity.setStatus(STATUS.PAGO);
                 entity.setDataPagamento(LocalDateTime.now());
                 entity.setPagamento(pagamento);
+                //novo
                 pedidoRepository.save(entity);
+                System.out.println(entity.getId());
+                relatorioMensalService.NovoLancamentoVendas(entity.getId());
             }
             else
             {throw new NullargumentsException();}

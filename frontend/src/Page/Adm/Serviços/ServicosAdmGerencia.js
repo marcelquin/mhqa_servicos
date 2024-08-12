@@ -10,8 +10,8 @@ export default function AdmServicoGerencia()
 {
 
 
-  const baseUrl = "http://34.28.64.143:8080"
-  //const baseUrl = "http://localhost:8080"
+  //const baseUrl = "http://34.28.64.143:8080"
+  const baseUrl = "http://localhost:8080"
   const[APIData, setAPIData]= useState([]);
   const[dadoPesquisa, setdadoPesquisa] = useState('')
   const pesquisa = dadoPesquisa.length > 0 ?
@@ -56,11 +56,9 @@ export default function AdmServicoGerencia()
                                           </div>
                                        </div>
                                        <div className="infoGeral">
-                                       {data.nome}<br/>
-                                      {data.descricao}<br/>
-                                      {data.codigo}
-                                      {data.valorFront}<br/>
-                                      {data.maoDeObra}
+                                      <span>Descrição: {data.descricao}</span><br/><br/>
+                                      <span>Código: {data.codigo}</span><br/><br/>
+                                      <span>Mão de Obra: {data.maoDeObra}</span><br/>
                                        </div>
 
                                     </div>
@@ -81,11 +79,9 @@ export default function AdmServicoGerencia()
                                         </div>
                                      </div>
                                      <div className="infoGeral">
-                                     {data.nome}<br/>
-                                    {data.descricao}<br/>
-                                    {data.codigo}
-                                    {data.valorFront}<br/>
-                                    {data.maoDeObra}
+                                      <span>Descrição: {data.descricao}</span><br/><br/>
+                                      <span>Código: {data.codigo}</span><br/><br/>
+                                      <span>Mão de Obra: {data.maoDeObra}</span><br/>
                                      </div>
 
                                   </div>

@@ -29,7 +29,7 @@ public class SecurityConfigurations {
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers(HttpMethod.POST, "/auth/login").permitAll()
                         .requestMatchers(HttpMethod.POST, "/auth/register").permitAll() //hasRole("ADMIN")
-                        .requestMatchers(HttpMethod.POST, "/cliente/**", "/pedido/**", "/produto/**", "/clienteempresa/**", "/empresa/**", "/fornecedor/**", "/estoque/**","/entrega/**" ).permitAll()
+                        .requestMatchers(HttpMethod.POST, "/cliente/**", "/pedido/**", "/produto/**", "/clienteempresa/**", "/empresa/**", "/fornecedor/**", "/estoque/**","/entrega/**","/realtorio/**"  ).permitAll()
                         .requestMatchers(HttpMethod.GET, "/cliente/**", "/pedido/**", "/produto/**", "/estoque/**", "/clienteempresa/**", "/empresa/**", "/fornecedor/**","/entrega/**").permitAll()
                         .requestMatchers(HttpMethod.PUT, "/cliente/**", "/pedido/**", "/produto/**", "/clienteempresa/**", "/empresa/**", "/empresa/**", "/fornecedor/**","/entrega/**").permitAll()
                         .requestMatchers(HttpMethod.DELETE, "/cliente/**", "/pedido/**", "/produto/**", "/clienteempresa/**", "/empresa/**", "/fornecedor/**").permitAll()

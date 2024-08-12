@@ -5,8 +5,8 @@ import Axios from 'axios';
 
 function Servico() {
 
-  const baseUrl = "http://34.28.64.143:8080"
-    //const baseUrl = "http://localhost:8080"
+  //const baseUrl = "http://34.28.64.143:8080"
+  const baseUrl = "http://localhost:8080"
   const[APIData, setAPIData]= useState([]);
 
   useEffect(() => {
@@ -28,10 +28,11 @@ function Servico() {
                                   <div className="Destaque">
                                     <div className="infoOs">
                                       <span>{data.nome}</span><br/>
-                                      <span>({data.valorFront})</span><br/>
+                                      
                                   </div>
                                 </div>
                                 <div className="infoGeral">
+                                    <span>({data.valorFront})</span><br/>
                                     <span>Descrição: {data.descricao}</span><br/><br/>
                                     <span>Código: {data.codigo}</span><br/><br/>
                                     <span>Mão de Obra: {data.maoDeObra}</span><br/>

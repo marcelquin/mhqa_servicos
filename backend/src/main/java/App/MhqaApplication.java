@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 @OpenAPIDefinition(info = @Info(title = "MHQA sistemas mini-ecommerce preção de servços",
-		version = "1.8",
+		version = "1.9",
 		description = "Gerencia de estoque e venda"))
 public class MhqaApplication {
 

@@ -43,7 +43,10 @@ function NavAdm() {
                     <td>RELATÓRIOS</td>
                 </tr>
                 <tr>
-                    <Link to={"/Adm"}><td><span>Gerenciar</span></td></Link>
+                    <Link to={"/DebitoCadastrar"}><td><span>Débitos</span></td></Link>
+                </tr>
+                <tr>
+                    <Link to={"/RelatorioGerencia"}><td><span>Gerenciar</span></td></Link>
                 </tr>
             </table>
         </>)
