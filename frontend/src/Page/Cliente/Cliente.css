@@ -1,75 +1,9 @@
-.clienteBoxRetorno
+.form-check
 {
-    width: 200px;
-    height: 200px;
-    margin: 20px;
+    margin-left: 20px;
 }
 
-.SeletorCadastro
+table
 {
-    width: 300px;
-    height: 50px;
-
+    margin-left: 20px;
 }
-
-.SeletorCadastro input
-{
-    margin: 20px;
-}
-
-
-.Conteudointerno
-{
-    width: 100%;
-    height: auto;
-    display: flex;
-}
-
-.Retorno
-{
-
-    width: 250px;
-    height: 250px;
-    margin: 10px;
-    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
-}
-
-.Retorno .Destaque
-{
-    display: flex;
-    background-color: rgb(146, 155, 235); 
-    margin-bottom: 3px;
-}
-
-.Destaque span
-{
-    color: black;
-    margin: 1px;
-}
-
-.Retorno .infoOs
-{
-
-    width: 180px;
-    height: 90px;
-    margin-top: 10px;
-}
-
-.infoOs .infoOsDados
-{
-    color: rgb(7, 7, 7);
-}
-
-.Retorno .infoGeral
-{
-
-    height: 175px;
-    width: 240px;
-    margin-left: 5px;
-}
-
-.infoGeral span
-{
-    color: black;
-}
-

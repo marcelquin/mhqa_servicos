@@ -1,58 +1,16 @@
 import { Link } from "react-router-dom"
 import './Nav.css'
-
+import 'bootstrap/dist/css/bootstrap.min.css'
 
 function Nav() {
     return(
         <>
-        <div className="NavBox">
-
-            <Link to="/">
-             <div className="box">
-                <div className="imgHome"></div>
-                
-                <span>Home</span>
-
-             </div>  
-             </Link>  
-
-             <Link to="/NovaOs">
-             <div className="box">
-                <div className="imgNovaOs"></div>
-                
-                <span>Nova OS</span>
-
-             </div>  
-             </Link>
-
-             <Link to="/Caixa">
-             <div className="box">
-                <div className="imgCaixa"></div>
-                
-                <span>Caixa</span>
-
-             </div>  
-             </Link>
-
-             <Link to="/Cliente">
-             <div className="box">
-                <div className="imgCliente"></div>
-                
-                <span>Cliente</span>
-
-             </div>  
-             </Link>
-             <Link to="/Servico">
-             <div className="box">
-                <div className="imgServico"></div>
-                
-                <span>Serviços</span>
-
-             </div>
-             </Link>
-
-        </div>
         
+        <nav class="nav nav-pills flex-column flex-sm-row">
+         <Link to="/" class="flex-sm-fill text-sm-center nav-link active" aria-current="page" href="#">Home</Link>
+         <Link to="/Cliente" class="flex-sm-fill text-sm-center nav-link" href="#">Cliente</Link>
+         <Link to="/Servico" class="flex-sm-fill text-sm-center nav-link" href="#">Serviços</Link>
+         </nav>
         </>
     )
 }

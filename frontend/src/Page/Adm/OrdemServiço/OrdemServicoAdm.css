@@ -2,3 +2,10 @@ span
 {
     color: black;
 }
+
+.blocoPrint
+{
+    width: 100%;
+    height: auto;
+    margin-left: 5px;
+}

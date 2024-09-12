@@ -7,18 +7,25 @@ import Axios from 'axios';
 
 function AdicionarServico() {
     
-  const baseUrl = "http://34.135.105.123:8080"
-  //const baseUrl = "http://localhost:8080"
+  //const baseUrl = "http://34.135.105.123:8080"
+  const baseUrl = "http://localhost:8080"
     const {id} = useParams()
     const[idServico, setidServico] = useState('')
     const navigate = useNavigate();
     const [ApiServico, setApiServico] = useState([])
-    const[dadoPesquisa, setdadoPesquisaCnpj] = useState('')
+    const[dadoPesquisa, setdadoPesquisa] = useState('')
     const pesquisa = dadoPesquisa.length > 0 ?
     ApiServico.filter(dados => dados.nome.includes(dadoPesquisa)) :
     [];
+    const[PostData, setPostData] = useState({
+      codigo: '',
+      cliente: '',
+      data: '',
+      itens: [],
+      valor: '',
+    })
 
-      const handleClick=async (e)=>{
+      const AdicionarServicoOS=async (e)=>{
         try{
           fetch(`${baseUrl}/vendas/AdicionarProdutoVenda`, {
             method: 'PUT',
@@ -35,6 +42,8 @@ function AdicionarServico() {
         }
       }  
 
+
+
     useEffect(() => {
         Axios
           .get(`${baseUrl}/servico/ListarServicos`)
@@ -46,59 +55,53 @@ function AdicionarServico() {
 
     return(
         <>
-            <div className='boxAdicionar'>
-                <div className='adicionarFormPesquisa'>
-                    <input type='text' onChange={(e)=>{setdadoPesquisaCnpj(e.target.value)}} placeholder='Nome do serviço' />
-                    <input type='submit' value="Adicionar" className='btn' onClick={handleClick}/>
-                </div>
-                <div className='adicionarRetornoInfo'>
 
-                        {dadoPesquisa.length > 0 ?(<>
-                            {pesquisa.map((data, i)=>{
-                                return(<>
+        <div className='blocoRetornoInfo'>
 
-                    <div className="Retorno">
-                             <input type='checkbox' onClick={(e)=>{setidServico(data.id)}}/>Selecionar
-                              <div className="Destaque">
-                                <div className="infoOs">
-                                  <span>{data.nome}</span><br/>
-                              </div>
-                            </div>
-                            <div className="infoGeral">
-                                <span>{data.descricao}</span><br/>
-                                <span>{data.codigo}</span><br/>
-                                <span>{data.valorFront}</span><br/>
-                                <span>{data.maoDeObra}</span><br/>
-                            </div>
-                     </div>
-                                </>)
-                            })}
-                        </>):(<>
-                            {ApiServico.map((data, i)=>{
-                                return(<>
-                                    <div className="Retorno">
-                                        <input type='checkbox' onClick={(e)=>{setidServico(data.id)}}/>Selecionar
-                                        <div className="Destaque">
-                                            <div className="infoOs">
-                                            <span>{data.nome}</span><br/>
-                                            <span>{data.valorFront}</span><br/>
-                                        </div>
-                                        </div>
-                                        <div className="infoGeral">
-                                            <span>{data.descricao}</span><br/>
-                                            <span>{data.codigo}</span><br/>
-                                            <span>{data.valorFront}</span><br/>
-                                            <span>{data.maoDeObra}</span><br/>
-                                        </div>
-                                    </div>
-                                </>)
-                            })}
-                        </>)}
+          <div class="input-group mb-3">
+              <span class="input-group-text" id="basic-addon1">Serviço</span>
+              <input type="text" class="form-control" name='dadoPesquisa' onChange={(e)=>{setdadoPesquisa(e.target.value)}} placeholder="Serviço Para Pesquisa" aria-label="Username" aria-describedby="basic-addon1"/>
+          </div>
 
-                        
-
-                </div>
-            </div>
+        </div>
+        <div className='blocoRetornoInfo'>
+          <form >
+            <table>
+              <td><button type="submit" class="btn btn-success">Salvar</button></td>
+            </table>
+          </form>
+        </div>
+        <div className='blocoRetornoInfo'>
+          <table>
+            <tr>
+              <td>Selecionar</td>
+              <td>Serviço</td>
+              <td>Código</td>
+              <td>Valor</td>
+            </tr>
+          </table>
+          {dadoPesquisa.length>0?(<>
+          
+            {pesquisa.map((data,i)=>{return(<>
+              <tr>
+              <td><input type='checkbox' onClick={(e)=>{setidServico(data.id)}}/></td>
+              <td>{data.nome}</td>
+              <td>{data.codigo}</td>
+              <td>{data.valorFront}</td>
+            </tr>
+            </>)})}
+          </>):(<>
+            {ApiServico.map((data,i)=>{return(<>
+              <tr>
+              <td><input type='checkbox' onClick={(e)=>{setidServico(data.id)}}/></td>
+              <td>{data.nome}</td>
+              <td>{data.codigo}</td>
+              <td>{data.valorFront}</td>
+            </tr>
+            </>)})}
+          </>)}
+        
+        </div>  
         </>)
 }
 

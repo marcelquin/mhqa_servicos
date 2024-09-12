@@ -1,6 +1,8 @@
 package App.Controller;
 
 import App.DTO.PedidoDTO;
+import App.DTO.PedidoResponseDTO;
+import App.DTO.PedidoResponseFullDTO;
 import App.Entity.PedidoEntity;
 import App.Enum.FORMAPAGAMENTO;
 import App.Service.PedidoService;
@@ -57,7 +59,7 @@ public class PedidoController {
             @ApiResponse(responseCode = "500", description = "Ops algoo deu errado"),
     })
     @GetMapping("/BuscarVendaPorId")
-    public ResponseEntity<PedidoDTO> BuscarVendaPorId(@RequestParam Long id)
+    public ResponseEntity<PedidoResponseDTO> BuscarVendaPorId(Long id)
     { return service.BuscarVendaPorId(id);}
 
     @Operation(summary = "Salva novo Registro na tabela", method = "POST")
@@ -68,13 +70,13 @@ public class PedidoController {
             @ApiResponse(responseCode = "500", description = "Ops algoo deu errado"),
     })
     @PostMapping("/NovoVenda")
-    public ResponseEntity<PedidoDTO> NovoVenda(Long idCliente,
+    public void NovoVenda(Long idCliente,
                                                Long idClienteEmpresa,
                                                String clienteNome,
                                                Long prefixo,
                                                Long telefone,
                                                @RequestParam String relatoProblema)
-    { return service.NovoVenda(idCliente,idClienteEmpresa,clienteNome,prefixo,telefone, relatoProblema);}
+    { service.NovoVenda(idCliente,idClienteEmpresa,clienteNome,prefixo,telefone, relatoProblema);}
 
     @Operation(summary = "Edita Registro na tabela", method = "PUT")
     @ApiResponses(value = {
@@ -98,8 +100,9 @@ public class PedidoController {
     @PutMapping("/FinalizarVenda")
     public void FinalizarVenda(@RequestParam Long id,
                                 @RequestParam FORMAPAGAMENTO formaPagamento,
+                                Double valorPago,
                                 Double parcelas)
-    { service.FinalizarVenda(id, formaPagamento,parcelas);}
+    { service.FinalizarVenda(id, formaPagamento, valorPago, parcelas);}
 
 
 }

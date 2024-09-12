@@ -6,8 +6,8 @@ import { useNavigate } from 'react-router-dom';
 
 export default function ProietarioAdmCad()
 {
-  const baseUrl = "http://34.135.105.123:8080"
-  //const baseUrl = "http://localhost:8080"
+  //const baseUrl = "http://34.135.105.123:8080"
+  const baseUrl = "http://localhost:8080"
     const navigate = useNavigate();
     const [PostData, setPostData] = useState({
       nome: "",
@@ -77,74 +77,115 @@ const handleChanage = (e) => {
   }
 
     return(<>
-        <div className="admBoxGeral">
-            <div className="admBoxNav">
-                    <NavAdm></NavAdm>
-            </div>
-            <div className="admSession">
-                <div className='conteudoGeral'>
 
-                
-                <form onSubmit={handleClick}>
-                    <fieldset>Dados Do Proprietário:<br/>
-                    <table>
+        <div className='blocoRetornoInfo'>
 
-                        <tr>
-                            <td><label>Nome: <br/>
-                            <input type="text" name="nome" id="" onChange={handleChanage}/></label></td>
-                            <td><label>Razão Social: <br/>
-                            <input type="text" name="razaoSocial"  onChange={handleChanage}/></label></td>                                    
-                        </tr>
-                        <tr>    
-                            <td><label>CNPJ: <br/>
-                            <input type="text" name="cnpj" placeholder="Digite o CNPJ da empresa"  onChange={handleChanage}/></label></td>                       
-                            <td><label>Área de Atuação: <br/>
-                            <input type="text" name="areaAtuacao" id="" onChange={handleChanage}/> </label></td>
-                        </tr>
-                         
-                    </table>
-                </fieldset>
-                <fieldset>Endereço:<br/>
-                    <table>
-                            <tr>
-                                <td><label>Logradouro: <br/>
-                                <input type="text" name="logradouro" placeholder="Digite o Nome da rua"  onChange={handleChanage}/></label></td>
-                                <td><label>Numero:<br/> 
-                                <input type="text" name="numero" placeholder="Digite o numero da casa"  onChange={handleChanage}/></label></td>
-                                <td><label>Bairro:<br/> 
-                                <input type="text" name="bairro" placeholder="Digite O Bairro"  onChange={handleChanage}/></label></td>
-                                </tr>
-                                <tr>
-                                <td><label>Referência:<br/>
-                                <input type="text" name="referencia" placeholder="Digite um Ponto de referência"  onChange={handleChanage}/></label></td>
-                                <td><label>CEP: <br/>
-                                <input type="number" name="cep" placeholder="Digite O Cep da cidade"  onChange={handleChanage}/></label></td>
-                                <td><label>Cidade: <br/>
-                                <input type="text" name="cidade" placeholder="Digite a cidade"  onChange={handleChanage}/></label></td>
-                                </tr>
-                                <tr>
-                                <td><label>Estado: <br/> 
-                                <input type="text" name="estado" placeholder="Digite a sigla do estado"  onChange={handleChanage}/></label></td>
-                            </tr>                        
-                        </table>
-                </fieldset>
-                <fieldset>Contato:<br/>
-                    <table>
-                        <tr>
-                            <td><label>Prefixo: <br/><input type="number" name="prefixo" id="" onChange={handleChanage}/></label></td>
-                            <td><label>Telefone: <br/><input type="number" name="telefone" id="" onChange={handleChanage}/></label></td>
-                            <td><label>E-mail: <br/><input type="email" name="email" id="" onChange={handleChanage}/></label></td>
-                            </tr>
-                            <tr>
-                            <td><input type="submit" value="Salvar" className="btn"/>  </td>
-                        </tr> 
-                    </table>
-                </fieldset>
-            </form>    
-            </div>    
-        </div>
-         </div>
-                    
-    
+        <form onSubmit={handleClick}>
+               <table>
+                  <tr>
+                     <td>
+                        <div class="input-group">
+                           <span class="input-group-text">Nome</span>
+                           <input type="text" class="form-control" name='nome' placeholder="Nome da Empresa" onChange={handleChanage} aria-label="Username" aria-describedby="basic-addon1" onChange={handleChanage} />
+                        </div>
+                     </td>
+                     <td>
+                        <div class="input-group">
+                           <span class="input-group-text">Razão Social</span>
+                           <input type="text" class="form-control" name='razaoSocial' placeholder="Razão Social da Empresa" onChange={handleChanage} aria-label="Username" aria-describedby="basic-addon1" onChange={handleChanage} />
+                        </div>
+                     </td>
+                     <td>
+                        <div class="input-group">
+                           <span class="input-group-text">CNPJ</span>
+                           <input type="text" class="form-control" name='cnpj' placeholder=" 99.999.999/9999-99" onChange={handleChanage} aria-label="Username" aria-describedby="basic-addon1" onChange={handleChanage} />
+                        </div>
+                     </td> 
+                     <td>
+                        <div class="input-group">
+                           <span class="input-group-text">Área de Atuação</span>
+                           <input type="text" class="form-control" name='areaAtuacao' placeholder="" onChange={handleChanage} aria-label="Username" aria-describedby="basic-addon1" onChange={handleChanage} />
+                        </div>
+                     </td>
+                  </tr>
+                  <br/>
+                  <tr>
+                     <td>
+                        <div class="input-group">
+                           <span class="input-group-text">Logradouro</span>
+                           <input type="text" class="form-control" name="logradouro" placeholder="" onChange={handleChanage} aria-label="Username" aria-describedby="basic-addon1" onChange={handleChanage} />
+                        </div>
+                     </td>
+                     <td>
+                        <div class="input-group">
+                           <span class="input-group-text">Numero</span>
+                           <input type="text" class="form-control" name="numero" placeholder="" onChange={handleChanage} aria-label="Username" aria-describedby="basic-addon1" onChange={handleChanage} />
+                        </div>
+                     </td>
+                     <td>
+                        <div class="input-group">
+                           <span class="input-group-text">Bairro</span>
+                           <input type="text" class="form-control"  name="bairro" placeholder="" onChange={handleChanage} aria-label="Username" aria-describedby="basic-addon1" onChange={handleChanage} />
+                        </div>
+                     </td>
+                  </tr>
+                  <br/>
+                  <tr>
+                     <td>
+                        <div class="input-group">
+                           <span class="input-group-text">Referência</span>
+                           <input type="text" class="form-control" name="referencia" placeholder="" onChange={handleChanage} aria-label="Username" aria-describedby="basic-addon1" onChange={handleChanage} />
+                        </div>
+                     </td>
+                     <td>
+                        <div class="input-group">
+                           <span class="input-group-text">Cep</span>
+                           <input type="text" class="form-control" name="cep" placeholder="00000000" onChange={handleChanage} aria-label="Username" aria-describedby="basic-addon1" onChange={handleChanage} />
+                        </div>
+                     </td>
+                     <td>
+                        <div class="input-group">
+                           <span class="input-group-text">Cidade</span>
+                           <input type="text" class="form-control" name="cidade" placeholder="" onChange={handleChanage} aria-label="Username" aria-describedby="basic-addon1" onChange={handleChanage} />
+                        </div>
+                     </td>
+                     <td>
+                        <div class="input-group">
+                           <span class="input-group-text">Estado</span>
+                           <input type="text" class="form-control" name="estado" placeholder="Nome do serviço" onChange={handleChanage} aria-label="Username" aria-describedby="basic-addon1" onChange={handleChanage} />
+                        </div>
+                     </td>
+                  </tr>
+                  <br/>
+                  <tr>
+                     <td>
+                      <div class="input-group">
+                        <span class="input-group-text">Prefixo</span>
+                        <input type="number" class="form-control" name="prefixo" placeholder="00" onChange={handleChanage} aria-label="Username" aria-describedby="basic-addon1" onChange={handleChanage} />
+                        </div>
+                     </td>
+                     <td>
+                        <div class="input-group">
+                        <span class="input-group-text">Telefone</span>
+                        <input type="number" class="form-control" name="telefone" placeholder="000000000" onChange={handleChanage} aria-label="Username" aria-describedby="basic-addon1" onChange={handleChanage} />
+                        </div>
+                     </td>
+                     <td>
+                        <div class="input-group">
+                        <span class="input-group-text">E-Mail</span>
+                        <input type="email" class="form-control" name="email" placeholder="Email Válido" onChange={handleChanage} aria-label="Username" aria-describedby="basic-addon1" onChange={handleChanage} />
+                        </div>
+                     </td>
+                  </tr>
+                  <br/>
+                  <tr>
+                     <td>
+                        <button type="submit" class="btn btn-success">Salvar</button>
+                     </td>
+                  </tr>
+               </table>
+            </form>
+
+        </div>  
     </>)
 }

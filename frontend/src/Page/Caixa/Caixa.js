@@ -5,8 +5,8 @@ import Axios from 'axios';
 
 function Caixa() {
 
-  const baseUrl = "http://34.135.105.123:8080"
-  //const baseUrl = "http://localhost:8080"
+  //const baseUrl = "http://34.135.105.123:8080"
+  const baseUrl = "http://localhost:8080"
   const[idPost, setidPost] = useState('')
   const[APIData, setAPIData]= useState([]);
   const[dadoPesquisa, setdadoPesquisa] = useState('')
@@ -16,6 +16,7 @@ function Caixa() {
   const [caixa, setCaixa] = useState({
     formaPagamento: "",
     parcelas: 1,
+    valorPago: 0
 });
 
 const handleChanage = (e) => {
@@ -56,103 +57,90 @@ const handleChanage = (e) => {
 
     return(
         <>
-            <div className="boxgeralFlex">
 
-                <div className="RetornoDuploForm">
-                    <div className="formAcao">
-                        <label>OS</label><br/>
-                        <input type="Text" placeholder='pesquisa' onChange={e=> setdadoPesquisa(e.target.value)} />
-                        <div className="pagamento">
-                            
-                        <form onSubmit={FinalizarPedido}>
-                    <table>
-                        <tr>
-                          <td><label>Forma de pagamento:<br/>
+          <div className='blocoRetornoInfo'>
+
+            <div class="input-group mb-3">
+              <span class="input-group-text" id="basic-addon1">Código</span>
+              <input type="text" class="form-control" name='dadoPesquisa' onChange={(e)=>{setdadoPesquisa(e.target.value)}} placeholder="Razão social Para Pesquisa" aria-label="Username" aria-describedby="basic-addon1"/>
+            </div>
+
+          </div>
+          <div className='blocoRetornoInfo'> 
+
+              <form onSubmit={FinalizarPedido}>
+                  
+                  <table>
+                      <tr>
+                        <td>
+                          <div class="input-group">
+                            <span class="input-group-text">Forma de pagamento</span>
                             <input list="formaPagamento" name="formaPagamento"  placeholder="Selecione a Forma de pagameto" onChange={handleChanage} />
-                                          <datalist id="formaPagamento">
-                                              <option value="DINHEIRO">DINHEIRO</option>
-                                              <option value="PIX">PIX</option>
-                                              <option value="CREDITO">CREDITO</option>
-                                              <option value="DEBITO">DEBITO</option>
-                                          </datalist>
-                                          </label></td>
-                        </tr>
-                        {caixa.formaPagamento.length === 7?(<>
-                          <tr>
-                          <td><label>Parcelas: <br/><input type="number" name="parcelas" onChange={handleChanage}/></label></td>   
-                          </tr>
-                        </>):(<></>)}         
-                        <tr>  
+                                <datalist id="formaPagamento">
+                                  <option value="DINHEIRO">DINHEIRO</option>
+                                  <option value="PIX">PIX</option>
+                                  <option value="CREDITO">CREDITO</option>
+                                  <option value="DEBITO">DEBITO</option>
+                                </datalist>                          
+                          </div>
+                        </td> 
                       </tr>
                       <tr>
-                        <td><input type="submit" value="Finalizar" className="btn" />
-                      </td>
+                        {caixa.formaPagamento.length ===8?(<>
+                        
+                          <div class="input-group">
+                            <span class="input-group-text">Valor Pago</span>
+                            <input type="number" class="form-control" name='valorPago' onChange={handleChanage} placeholder="" aria-label="Username" aria-describedby="basic-addon1" />
+                          </div>
+
+                        </>):(<></>)} 
+                        {caixa.formaPagamento.length ===7?(<>
+                          <div class="input-group">
+                            <span class="input-group-text">parcelas</span>
+                            <input type="number" class="form-control" name='parcelas' onChange={handleChanage} placeholder="" aria-label="Username" aria-describedby="basic-addon1" />
+                          </div>
+                        </>):(<></>)} 
+                      </tr>
+                      <tr>
+                        <td><button type="submit" class="btn btn-success">Salvar</button></td>
                       </tr>
                   </table>
-                </form>
-                        </div>    
-                    </div>
 
-                </div>
+              </form>
 
-                <div className="retornoInfo">
-                  {dadoPesquisa.length > 0 ? (<>
-                    {pesquisa.map((data, i)=>{
-                      return(<>
-                        <div className="Retorno">
-                              <td><input type='checkbox' onClick={(e)=>{setidPost(data.id)}} />Selecionar</td>
-                              <div className="Destaque">
-                                <div className="infoOs">
-                                  <span>{data.nomeCliente}</span><br/>
-                                  <span>{data.valorTotalFront}</span><br/>
-                                  <span>{data.codigo}</span>
-                                  <span>{data.status}</span>
-                              </div>
-                            </div>
-                            <div className="infoGeral">
-                            <span>{data.dataPedido}</span><br/>
-                            {data.produtos.map((data, i)=>{
-                            return(<>
-                                <span>{data.nome}</span><br/>
-                            </>)
-                          })}                           
-                            </div>
-                         </div>
-                      </>)
-                    })}
-                    
-                </>):(<>
-                  {APIData.map((data, i)=>{
-                    return(<>
+          </div>
+          <div className='blocoRetornoInfo'> 
 
-                            <div className="Retorno">
-                              <td><input type='checkbox' onClick={(e)=>{setidPost(data.id)}} />Selecionar</td>
-                              <div className="Destaque">
-                                <div className="info">
-                                  <span>{data.nomeCliente}</span><br/>
-                                  <span>{data.valorTotalFront}</span><br/>
-                                  <span>{data.codigo}</span>
-                                  <span>{data.dataPedido}</span><br/>
-                                  <span>{data.status}</span>
-                              </div>
-                            </div>
-                            <div className="infoGeral">
-                              {data.produtos.map((data, i)=>{
-                                return(<>
-                                    <span>{data.nome} {data.codigo}</span><br/>
-                                </>)
-                              })}
-                            </div>
-                         </div>
-
-                  </>)
-                  })}
-                  
-                </>)}
+             <table>
+                <tr>
+                  <td>Selecionar</td>
+                  <td>Cliente</td>
+                  <td>Código</td>
+                  <td>Valor</td>
+                </tr>
+                {dadoPesquisa.length>0?(<>
                 
-                </div>
+                  {pesquisa.map((data,i)=>{return(<>
+                    <tr key={i}>
+                      <td><input type='checkbox' onClick={(e)=>{setidPost(data.id)}} /></td>
+                      <td>{data.nomeCliente}</td>
+                      <td>{data.codigo}</td>
+                      <td>{data.valorTotalFront}</td>
+                    </tr>
+                  </>)})}
+                </>):(<>
+                  {APIData.map((data,i)=>{return(<>
+                    <tr key={i}>
+                      <td><input type='checkbox' onClick={(e)=>{setidPost(data.id)}} /></td>
+                      <td>{data.nomeCliente}</td>
+                      <td>{data.codigo}</td>
+                      <td>{data.valorTotalFront}</td>
+                    </tr>
+                  </>)})}
+                </>)}
+             </table>               
 
-            </div>
+          </div>
         </>)
 }
 

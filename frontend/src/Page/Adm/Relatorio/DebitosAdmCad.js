@@ -1,5 +1,6 @@
-import './Relatorio.css';
+import './FinanceiroAdm.css';
 import '../AdmGlobal.css'
+import 'bootstrap/dist/css/bootstrap.min.css'
 import NavAdm from '../../../Component/NavAdm/NavAdm'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
@@ -7,8 +8,8 @@ import { useNavigate } from 'react-router-dom';
 
 function DebitosAdmCad() {
 
-    const baseUrl = "http://34.135.105.123:8080"
-  //const baseUrl = "http://localhost:8080"
+    //const baseUrl = "http://34.135.105.123:8080"
+  const baseUrl = "http://localhost:8080"
     const navigate = useNavigate();
     const[idEmpresaDebito, setidEmpresaDebito] = useState('')
     const[carenciaP, setcarenciaP] = useState('')
@@ -43,14 +44,13 @@ function DebitosAdmCad() {
 
     const handleClick=async (e)=>{
         try{
-          fetch(`${baseUrl}/debitos/NovoLancamentoDebito`, {
+          fetch(`${baseUrl}/relatorios/NovoLancamentoDebito`, {
             method: 'POST',
             headers:{
               'Content-Type': 'application/x-www-form-urlencoded'
             },    
             body: new URLSearchParams({
-                'idEmpresa':idEmpresaDebito,
-                'razaoSocial': postData.razaoSocial,
+                'empresa': postData.razaoSocial,
                 'cnpj': postData.cnpj,
                 'diaVencimento':postData.diaVencimento,
                 'parcelas':postData.parcelas,
@@ -63,9 +63,9 @@ function DebitosAdmCad() {
             cnpj: '',
             dataEmissao: '',
             diaVencimento: '',
-            parcelas: '',
+            parcelas: 1,
             valorBoleto: '',
-            carenciaPagamento: ''
+            carenciaPagamento: 0
         })
         }catch (err){
           console.log("erro")
@@ -92,36 +92,36 @@ function DebitosAdmCad() {
                                     </>)
                                 })}
                                 <table>
-                                <fieldset>Dados da empresa
                                     <tr>
                                        <td>
-                                            <label>Razao Social: <br/>
-                                            <input type="text" name="razaoSocial" id="nome" onChange={handleChanage}/>
-                                            </label>
+                                            <div class="input-group mb-3">
+                                                <span class="input-group-text" id="basic-addon1">Razao Social</span>
+                                                <input type="text" name='razaoSocial' onChange={handleChanage} class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1"/>
+                                            </div> 
                                        </td>
                                        <td>
-                                            <label>CNPJ: <br/>
-                                            <input type="text" name="cnpj" id="nome" onChange={handleChanage}/>
-                                            </label>
+                                            <div class="input-group mb-3">
+                                                <span class="input-group-text" id="basic-addon1">CNPJ</span>
+                                                <input type="text" name='cnpj' onChange={handleChanage} class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1"/>
+                                            </div> 
                                         </td> 
                                     </tr>
-                                </fieldset>
-                                <fieldset>Dados de Boleto
                                     <tr>
+                                            <div class="input-group mb-3">
+                                                <span class="input-group-text" id="basic-addon1">Dia de Vencimento</span>
+                                                <input type="number" name='diaVencimento' onChange={handleChanage} class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1" />
+                                            </div> 
                                         <td>
-                                            <label>Dia de Vencimento: <br/>
-                                            <input type="number" name="diaVencimento" id="diaVencimento" onChange={handleChanage}/>
-                                            </label>
+                                            <div class="input-group mb-3">
+                                                <span class="input-group-text" id="basic-addon1">Parcelas</span>
+                                                <input type="number" name='parcelas' onChange={handleChanage} class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1" />
+                                            </div> 
                                         </td>
                                         <td>
-                                            <label>Parcelas: <br/>
-                                            <input type="number" name="parcelas" id="parcelas" onChange={handleChanage}/>
-                                            </label>
-                                        </td>
-                                        <td>
-                                            <label>Valor Total: <br/>
-                                            <input type="number" name="valorBoleto" id="valorTotal" onChange={handleChanage}/>
-                                            </label>
+                                            <div class="input-group mb-3">
+                                                <span class="input-group-text" id="basic-addon1">Valor Total</span>
+                                                <input type="number" name='valorBoleto' onChange={handleChanage} class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1"/>
+                                            </div>
                                         </td>
                                     </tr>
                                     <tr>
@@ -129,14 +129,16 @@ function DebitosAdmCad() {
                                     </tr>
                                     <tr>
                                             {carenciaP.length ?(<>
-                                            <td>Meses de carencia: <br/>
-                                        <input type="number" name="carenciaPagamento" id="valorTotal" onChange={handleChanage}/>
-                                        </td>
+                                            <td>
+                                                <div class="input-group mb-3">
+                                                    <span class="input-group-text" id="basic-addon1">Meses de carencia</span>
+                                                    <input type="number" name='carenciaPagamento' onChange={handleChanage} class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1" />
+                                                </div>
+                                            </td>
                                         </>):(<></>)}
                                     </tr>
-                                </fieldset>
                                     <tr>
-                                        <td><input type='submit' value="salvar"/></td>
+                                        <button type="submit" class="btn btn-success">Salvar</button>
                                     </tr>
                                 </table>
                             

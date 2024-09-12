@@ -1,6 +1,9 @@
 package App.Service;
 
 import App.DTO.PedidoDTO;
+import App.DTO.PedidoResponseDTO;
+import App.DTO.PedidoResponseFullDTO;
+import App.DTO.ServicosResponseDTO;
 import App.Entity.*;
 import App.Enum.FORMAPAGAMENTO;
 import App.Enum.STATUS;
@@ -81,20 +84,46 @@ public class PedidoService {
         return null;
     }
 
-    public ResponseEntity<PedidoDTO> BuscarVendaPorId(Long id)
+    public ResponseEntity<PedidoResponseDTO> BuscarVendaPorId(Long id)
     {
         try
         {
             PedidoEntity entity = pedidoRepository.findById(id).orElseThrow(
                     ()-> new EntityNotFoundException()
             );
-            List<String> itens = new ArrayList<>();
-            for(ItemPedidoEntity item: entity.getProdutos())
-            {
-                itens.add(item.getServico().getNome()+" "+item.getServico().getCodigo());
+            List<ServicosResponseDTO> itens = new ArrayList<>();
+            for(ItemPedidoEntity item: entity.getProdutos()) {
+                ServicosResponseDTO dto = new ServicosResponseDTO(item.getServico().getNome(),
+                        item.getServico().getCodigo(),
+                        NumberFormat.getCurrencyInstance(localBrasil).format(item.getServico().getValor()));
+                itens.add(dto);
             }
-            PedidoDTO response = new PedidoDTO(entity.getCodigo(),entity.getCliente().getNome(),itens, entity.getValorTotalFront(),entity.getPagamento().getFormaPagamento(), entity.getPagamento().getDataPagamento());
-            return new ResponseEntity<>(response,HttpStatus.CREATED);
+            if(entity.getStatus() == STATUS.PAGO)
+            {
+                PedidoResponseDTO response = new PedidoResponseDTO(entity.getCodigo(),
+                        entity.getNomeCliente(),
+                        entity.getDataPedido(),
+                        itens,
+                        entity.getValorTotalFront(),
+                        entity.getPagamento().getParcelas(),
+                        entity.getStatus(),
+                        entity.getPagamento().getFormaPagamento(),
+                        entity.getPagamento().getDataPagamento());
+                return new ResponseEntity<>(response,HttpStatus.OK);
+            }
+            if(entity.getStatus() == STATUS.AGUARDANDO)
+            {
+                PedidoResponseDTO response = new PedidoResponseDTO(entity.getCodigo(),
+                        entity.getNomeCliente(),
+                        entity.getDataPedido(),
+                        itens,
+                        entity.getValorTotalFront(),
+                        null,
+                        entity.getStatus(),
+                        null,
+                        null);
+                return new ResponseEntity<>(response,HttpStatus.OK);
+            }
         }
         catch (Exception e)
         {
@@ -104,7 +133,7 @@ public class PedidoService {
     }
 
 
-    public ResponseEntity<PedidoDTO> NovoVenda(Long idCliente,
+    public void NovoVenda(Long idCliente,
                                                Long idClienteEmpresa,
                                                String clienteNome,
                                                Long prefixo,
@@ -135,7 +164,7 @@ public class PedidoService {
                 entity.setStatus(STATUS.AGUARDANDO);
                 pedidoRepository.save(entity);
                 PedidoDTO response = new PedidoDTO(entity.getCodigo(),entity.getCliente().getNome(),null,entity.getValorTotalFront(),entity.getPagamento().getFormaPagamento(), entity.getPagamento().getDataPagamento());
-                return new ResponseEntity<>(response,HttpStatus.CREATED);
+
             }
             if(idClienteEmpresa != null)
             {
@@ -156,7 +185,6 @@ public class PedidoService {
                 entity.setStatus(STATUS.AGUARDANDO);
                 pedidoRepository.save(entity);
                 PedidoDTO response = new PedidoDTO(entity.getCodigo(),entity.getCliente().getNome(),null,entity.getValorTotalFront(),entity.getPagamento().getFormaPagamento(), entity.getPagamento().getDataPagamento());
-                return new ResponseEntity<>(response,HttpStatus.CREATED);
             }
             if(clienteNome != null)
             {
@@ -171,14 +199,14 @@ public class PedidoService {
                 entity.setStatus(STATUS.AGUARDANDO);
                 pedidoRepository.save(entity);
                 PedidoDTO response = new PedidoDTO(entity.getCodigo(),entity.getCliente().getNome(),null,entity.getValorTotalFront(),entity.getPagamento().getFormaPagamento(), entity.getPagamento().getDataPagamento());
-                return new ResponseEntity<>(response,HttpStatus.CREATED);
+
             }
         }
         catch (Exception e)
         {
             e.getMessage();
         }
-        return null;
+
     }
 
     public void AdicionarProdutoVenda(Long id,
@@ -220,6 +248,7 @@ public class PedidoService {
 
     public void FinalizarVenda(Long id,
                                 FORMAPAGAMENTO formaPagamento,
+                                Double valorPago,
                                 Double parcelas)
     {
         try
@@ -227,6 +256,7 @@ public class PedidoService {
             if(id != null &&
                formaPagamento != null)
             {
+                if(valorPago < 0){throw new IllegalActionException("O campo não pode ser negativo");}
                 if(parcelas < 0){throw new IllegalActionException("O campo não pode ser negativo");}
                 if(formaPagamento != FORMAPAGAMENTO.CREDITO && parcelas > 1)
                 {throw new IllegalActionException("Somente compras no crédito podem ser parceladas");}
@@ -236,16 +266,34 @@ public class PedidoService {
                 PagamentoEntity pagamento = new PagamentoEntity();
                 pagamento.setFormaPagamento(formaPagamento);
                 pagamento.setParcelas(parcelas);
-                pagamento.setValor(entity.getValorTotal());
+                pagamento.setValorOs(entity.getValorTotal());
+                if(formaPagamento == FORMAPAGAMENTO.DINHEIRO && valorPago != null)
+                {
+                    pagamento.setValorTroco(valorPago - entity.getValorTotal());
+                }
                 pagamento.setDataPagamento(LocalDateTime.now());
                 pagamento.setTimeStamp(LocalDateTime.now());
                 entity.setStatus(STATUS.PAGO);
                 entity.setDataPagamento(LocalDateTime.now());
                 entity.setPagamento(pagamento);
                 //novo
+                List<String> itensList = new ArrayList<>();
+                for(ItemPedidoEntity item : entity.getProdutos())
+                {
+                    itensList.add(item.getServico().getNome());
+                }
                 pedidoRepository.save(entity);
                 System.out.println(entity.getId());
-                relatorioMensalService.NovoLancamentoVendas(entity.getId());
+                relatorioMensalService.NovoLancamentoVendas(entity.getNomeCliente(),
+                        entity.getCpfCnpj(),
+                        entity.getCodigo(),
+                        itensList,
+                        entity.getStatus(),
+                        entity.getDataPedido(),
+                        entity.getValorTotal(),
+                        entity.getPagamento().getParcelas(),
+                        entity.getPagamento().getFormaPagamento()
+                        );
             }
             else
             {throw new NullargumentsException();}

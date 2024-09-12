@@ -27,7 +27,8 @@ public class PagamentoEntity {
 
     private Double parcelas;
 
-    private Double valor;
+    private Double valorOs;
+    private Double valorTroco;
 
     private Double valorParcela;
 

@@ -6,8 +6,8 @@ import Axios from 'axios';
 
 function NovaOrdem() {
 
-  const baseUrl = "http://34.135.105.123:8080"
-  //const baseUrl = "http://localhost:8080"
+  //const baseUrl = "http://34.135.105.123:8080"
+  const baseUrl = "http://localhost:8080"
     const navegate = useNavigate()
     const [filtroCadastro, setfiltroCadastro] = useState('')
     const [idCLiente, setidCLiente] = useState('')
@@ -79,118 +79,208 @@ function NovaOrdem() {
     
     return(
         <>
-            <div className='SeletorCadastro'>
-                    <input type='radio' value="CPF" onClick={(e)=>{setfiltroCadastro(e.target.value)}} />CPF
-                    <input type='radio' value="CNPJ" onClick={(e)=>{setfiltroCadastro(e.target.value)}} />CNPJ
-                </div>
-            <div className="boxgeral">
+          <div className='blocoRetornoInfo'>
 
-                {filtroCadastro.length === 3?(<>
-                    
-                    <div className="campoPesquisaNovaOs">
-                        <label>Nome:
-                        <input type="text" name="dadoPesquisacpf" className="inputPesquisa" onChange={e=> {setdadoPesquisaCpf(e.target.value); setnomeCLiente(e.target.value)}} placeholder="Digite o Nome para busca" />
-                        </label>
-                        <br/>
-                        <label>prefixo:
-                        <input type="number" name="prefixo" className="inputPesquisa" onChange={e=> {setprefixo(e.target.value)}} placeholder="99" />
-                        </label>
-                        <label>telefone:
-                        <input type="number" name="telefone" className="inputPesquisa" onChange={e=> {settelefone(e.target.value)}} placeholder="999999999" />
-                        </label>
-                        <br/>
-                        <label>Problema Relatado:<br/>
-                        <input type="text" name="relatoProblema" className="inputPesquisa" onChange={e=> {setrelatoProblema(e.target.value)}} placeholder="Digite o defeito inicial" />
-                        </label>
-                        <input type='submit' value="Iniciar OS" onClick={NovaOrdemServico} />
-                    </div>
-                    
-                    <div className='conteudoInterno'>
-                        
-                        {dadoPesquisaCpf.length > 0?(<>
-                            {pesquisacpf.map((data, i)=>{
-                            return(<>
-                            <div className="Retorno">
-                             <input type='checkbox' onClick={(e)=>{setidCLiente(data.id)}}/>Selecionar
-                              <div className="Destaque">
-                                <div className="infoOs">
-                                  <span>{data.nome} {data.sobrenome}</span><br/><br/>
-                                  <span>({data.contato.prefixo}) {data.contato.telefone}</span><br/>
-                              </div>
-                              </div>
-                              
-                            </div>
-                              </>)
-                        })}
-                        </>):(<>
-                            {APIDataCpf.map((data, i)=>{
-                        return(<>
-                            <div className="Retorno">
-                             <input type='checkbox' onClick={(e)=>{setidCLiente(data.id)}}/>Selecionar
-                              <div className="Destaque">
-                                <div className="infoOs">
-                                  <span>{data.nome} {data.sobrenome}</span><br/><br/>
-                                  <span>({data.contato.prefixo}) {data.contato.telefone}</span><br/>
-                              </div>
-                              </div>
-                            </div>
-                        </>)
-                    })} 
-                        </>)}                                     
-                    </div>               
-                </>):(<>
-                    <div className="campoPesquisaNovaOs">
-                    <label>Nome:
-                        <input type="text" name="dadoPesquisacpf" className="inputPesquisa" onChange={e=> {setdadoPesquisaCpf(e.target.value); setnomeCLiente(e.target.value)}} placeholder="Digite o Nome para busca" />
-                        </label>
-                        <br/>
-                        <label>prefixo:
-                        <input type="number" name="prefixo" className="inputPesquisa" onChange={e=> {setprefixo(e.target.value)}} placeholder="99" />
-                        </label>
-                        <label>telefone:
-                        <input type="number" name="telefone" className="inputPesquisa" onChange={e=> {settelefone(e.target.value)}} placeholder="999999999" />
-                        </label>
-                        <br/>
-                        <label>Problema Relatado:<br/>
-                        <input type="text" name="relatoProblema" className="inputPesquisa" onChange={e=> {setrelatoProblema(e.target.value)}} placeholder="Digite o defeito inicial" />
-                        </label>
-                        <input type='submit' value="Iniciar OS" onClick={NovaOrdemServico} />
-                    </div>
-                    <div className='conteudoInterno'>
-                        {dadoPesquisaCnpj.length > 0?(<>
-                            {pesquisacnpj.map((data, i)=>{
-                            return(<>
-                            <div className="Retorno">
-                             <input type='checkbox' onClick={(e)=>{setidClienteEmpresa(data.id)}}/>Selecionar
-                              <div className="Destaque">
-                                <div className="infoOs">
-                                  <span>{data.razaoSocial}</span><br/><br/>
-                                  <span>({data.contato.prefixo}) {data.contato.telefone}</span><br/>
-                              </div>
-                              </div>
-                            </div>
-                            </>)
-                        })}
-                        </>):(<>
-                            {APIDataCnpj.map((data, i)=>{
-                        return(<>
-                            <div className="Retorno">
-                             <input type='checkbox' onClick={(e)=>{setidClienteEmpresa(data.id)}}/>Selecionar
-                              <div className="Destaque">
-                                <div className="infoOs">
-                                  <span>{data.razaoSocial}</span><br/><br/>
-                                  <span>({data.contato.prefixo}) {data.contato.telefone}</span><br/>
-                              </div>
-                              </div>
-                            </div>
-                        </>)
-                    })} 
-                        </>)}                                     
-                    </div>               
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" onClick={(e)=>{setfiltroCadastro("CPF")}}/>
+                <label class="form-check-label" for="flexRadioDefault1">
+                  CPF
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" onClick={(e)=>{setfiltroCadastro("CNPJ")}}/>
+                <label class="form-check-label" for="flexRadioDefault2">
+                  CNPJ
+                </label>
+              </div>
+      
+          </div>
+          <div className='blocoRetornoInfo'>
+
+              {filtroCadastro.length === 3?(<>
+              
+                <div className='blocoRetornoInfo'>
+
+                  <div class="input-group mb-3">
+                      <span class="input-group-text" id="basic-addon1">Nome</span>
+                      <input type="text" class="form-control" name='dadoPesquisaCpf' onChange={(e)=>{setdadoPesquisaCpf(e.target.value)}}  placeholder="Nome Para Pesquisa" aria-label="Username" aria-describedby="basic-addon1"/>
+                  </div>
+
+                </div>
+
+                <div className='blocoRetornoInfo'>
+
+                  <form onSubmit={NovaOrdemServico}>
+                    <table>
+                      <tr>
+                        <td>
+                          <div class="input-group">
+                            <span class="input-group-text">Nome</span>
+                            <input type="text" class="form-control" name='nome' className="inputPesquisa" onChange={e=> {setdadoPesquisaCpf(e.target.value); setnomeCLiente(e.target.value)}} placeholder="Razão Social da Empresa" aria-label="Username" aria-describedby="basic-addon1" />
+                          </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <div class="input-group">
+                            <span class="input-group-text">Prefixo</span>
+                            <input type="text" class="form-control" name='prefixo' onChange={e=> {setprefixo(e.target.value)}} placeholder="00" aria-label="Username" aria-describedby="basic-addon1" />
+                          </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <div class="input-group">
+                            <span class="input-group-text">Telefone</span>
+                            <input type="text" class="form-control" name='telefone' placeholder="000000000" onChange={e=> {settelefone(e.target.value)}} aria-label="Username" aria-describedby="basic-addon1" />
+                          </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <div class="input-group">
+                            <span class="input-group-text">Razão Social</span>
+                            <input type="text" class="form-control" name='relatoProblema' onChange={e=> {setrelatoProblema(e.target.value)}} placeholder="Defeito Relatado" aria-label="Username" aria-describedby="basic-addon1" />
+                          </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <button type="submit" class="btn btn-success">Salvar</button>
+                        </td>
+                      </tr>
+                    </table>
+                  </form>
+
+                </div>
                 
-                </>)}
-            </div>
-        </>)
+                <div className='blocoRetornoInfo'>
+
+                    <table>
+                      <tr>
+                        <td>Selecionar</td>
+                        <td>Nome</td>
+                        <td>Telefone</td>
+                      </tr>
+
+                      {dadoPesquisaCpf.length >0?(<>
+                      
+                        {pesquisacpf.map((data, i)=>{return(<>
+                        
+                          <tr key={i}>
+                            <td><input type='checkbox' onClick={(e)=>{setidCLiente(data.id)}}/>Selecionar</td>
+                            <td>{data.nome} {data.sobrenome}</td>
+                            <td>({data.contato.prefixo}) {data.contato.telefone}</td>
+                          </tr>
+                        </>)})}
+                      </>):(<>
+                      
+                        {APIDataCpf.map((data, i)=>{return(<>
+                        
+                          <tr key={i}>
+                            <td><input type='checkbox' onClick={(e)=>{setidCLiente(data.id)}}/>Selecionar</td>
+                            <td>{data.nome} {data.sobrenome}</td>
+                            <td>({data.contato.prefixo}) {data.contato.telefone}</td>
+                          </tr>
+                        </>)})}
+                      </>)}  
+
+                    </table>
+
+                </div>
+              </>):(<></>)}
+              {filtroCadastro.length === 4?(<>
+              
+                <div className='blocoRetornoInfo'>
+
+                  <div class="input-group mb-3">
+                      <span class="input-group-text" id="basic-addon1">Razão Social</span>
+                      <input type="text" class="form-control" name='dadoPesquisaCnpj' onChange={(e)=>{setdadoPesquisaCnpj(e.target.value)}} placeholder="Razão social Para Pesquisa" aria-label="Username" aria-describedby="basic-addon1"/>
+                  </div>
+
+                </div>
+
+                <div className='blocoRetornoInfo'>
+
+                  <form onSubmit={NovaOrdemServico}>
+                    <table>
+                      <tr>
+                        <td>
+                          <div class="input-group">
+                            <span class="input-group-text">Nome</span>
+                            <input type="text" class="form-control" name='nome' className="inputPesquisa" onChange={e=> {setdadoPesquisaCpf(e.target.value); setnomeCLiente(e.target.value)}} placeholder="Razão Social da Empresa" aria-label="Username" aria-describedby="basic-addon1" />
+                          </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <div class="input-group">
+                            <span class="input-group-text">Prefixo</span>
+                            <input type="text" class="form-control" name='prefixo' onChange={e=> {setprefixo(e.target.value)}} placeholder="00" aria-label="Username" aria-describedby="basic-addon1" />
+                          </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <div class="input-group">
+                            <span class="input-group-text">Telefone</span>
+                            <input type="text" class="form-control" name='telefone' placeholder="000000000" onChange={e=> {settelefone(e.target.value)}} aria-label="Username" aria-describedby="basic-addon1" />
+                          </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <div class="input-group">
+                            <span class="input-group-text">Razão Social</span>
+                            <input type="text" class="form-control" name='relatoProblema' onChange={e=> {setrelatoProblema(e.target.value)}} placeholder="Defeito Relatado" aria-label="Username" aria-describedby="basic-addon1" />
+                          </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <button type="submit" class="btn btn-success">Salvar</button>
+                        </td>
+                      </tr>
+                    </table>
+                  </form>
+
+                </div>
+
+                <div className='blocoRetornoInfo'>
+
+                    <table>
+                      <tr>
+                        <td>Selecionar</td>
+                        <td>Razão Social</td>
+                        <td>Telefone</td>
+                      </tr>
+                      {dadoPesquisaCnpj.length >0?(<>
+                      
+                      {pesquisacnpj.map((data, i)=>{return(<>
+                      
+                        <tr key={i}>
+                            <td><input type='checkbox' onClick={(e)=>{setidClienteEmpresa(data.id)}}/>Selecionar</td>
+                            <td>{data.razaoSocial}</td>
+                            <td>({data.contato.prefixo}) {data.contato.telefone}</td>
+                        </tr>
+                      </>)})}
+                    </>):(<>
+                    
+                      {APIDataCnpj.map((data, i)=>{return(<>
+                      
+                        <tr key={i}>
+                            <td><input type='checkbox' onClick={(e)=>{setidClienteEmpresa(data.id)}}/>Selecionar</td>
+                            <td>{data.razaoSocial}</td>
+                            <td>({data.contato.prefixo}) {data.contato.telefone}</td>
+                        </tr>
+                      </>)})}
+                    </>)} 
+                    </table>
+
+                </div>
+              </>):(<></>)}
+          </div>
+        </>)     
 }
 
 export default NovaOrdem

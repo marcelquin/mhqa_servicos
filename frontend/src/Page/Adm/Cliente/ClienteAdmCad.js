@@ -1,13 +1,12 @@
 import './ClienteAdm.css'
 import '../AdmGlobal.css'
-import NavAdm from '../../../Component/NavAdm/NavAdm'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 
 export default function AdmClienteCad()
 {
-   const baseUrl = "http://34.135.105.123:8080"
-  //const baseUrl = "http://localhost:8080"
+   //const baseUrl = "http://34.135.105.123:8080"
+  const baseUrl = "http://localhost:8080"
     const[filtroCadastro, setfiltroCadastro] = useState('')
     const navigate = useNavigate();
     const [clienteData, setclienteData] = useState({
@@ -123,7 +122,6 @@ export default function AdmClienteCad()
        nome: "",
        razaoSocial: "",
        cnpj: "",
-       areaAtuacao: "",
        logradouro: "",
        numero: "",
        bairro: "",
@@ -140,136 +138,241 @@ export default function AdmClienteCad()
    }
  }
     return(<>
-        <div className="admBoxGeral">
-                
-                <div className="admBoxNav">
-                    <NavAdm></NavAdm>
-                </div>
 
-                <div className="admSession">
-                    <div className='SeletorCadastro'>
-                        <input type='radio' value="CPF" onClick={(e)=>{setfiltroCadastro(e.target.value)}} />CPF
-                        <input type='radio' value="CNPJ" onClick={(e)=>{setfiltroCadastro(e.target.value)}} />CNPJ
-                     </div>
-                     {filtroCadastro.length === 3?(<>
-                     <div className='conteudoGeral'>
-                        
-                        <form onSubmit={handleClickcpf}>
-                           <fieldset>Dados pessoais:<br/>
-                                 <table>
-                                    <tr>
-                                    <td><label> Nome:<br/> 
-                                    <input type="text" name="nome" id="nome" onChange={handleChanage}/></label></td>
-                                    <td><label>Sobreome:<br/>
-                                    <input type="text" name="sobrenome"  onChange={handleChanage}/></label></td>
-                                    <td><label>CPF:<br/>
-                                    <input type="text" name="cpf" placeholder="Somente numeros"  onChange={handleChanage}/></label></td>
-                                    </tr>
-                                    <tr>
-                                    <td><label>Data de Nascimento:<br/>
-                                    <input type="text" name="dataNascimento" placeholder="dd/mm/aaaa"  onChange={handleChanage}/></label></td>
-                                    </tr>
-                                 </table>
-                              </fieldset>
-                              <fieldset>Endereço:<br/>  
-                                 <table>
-                                    <tr>
-                                    <td><label>Logradouro: <br/>
-                                    <input type="text" name="logradouro" placeholder="Digite o Nome da rua"  onChange={handleChanage}/></label></td>
-                                    <td><label>Numero:<br/> 
-                                    <input type="text" name="numero" placeholder="Digite o numero da casa"  onChange={handleChanage}/></label></td>
-                                    <td><label>Bairro:<br/> 
-                                    <input type="text" name="bairro" placeholder="Digite O Bairro"  onChange={handleChanage}/></label></td>
-                                    </tr>
-                                    <tr>
-                                    <td><label>Referência:<br/>
-                                    <input type="text" name="referencia" placeholder="Digite um Ponto de referência"  onChange={handleChanage}/></label></td>
-                                    <td><label>CEP: <br/>
-                                    <input type="number" name="cep" placeholder="Digite O Cep da cidade"  onChange={handleChanage}/></label></td>
-                                    <td><label>Cidade: <br/>
-                                    <input type="text" name="cidade" placeholder="Digite a cidade"  onChange={handleChanage}/></label></td>
-                                    </tr>
-                                    <tr>
-                                    <td><label>Estado: <br/> 
-                                    <input type="text" name="estado" placeholder="Digite a sigla do estado"  onChange={handleChanage}/></label></td>
-                                    </tr>
-                                 </table>
-                              </fieldset>
-                              <fieldset>Contato:<br/>
-                                 <table>
-                                    <tr>
-                                    <td><label> Prefixo: <br/>
-                                    <input type="number" name="prefixo" placeholder="99"  onChange={handleChanage}/></label></td>
-                                    <td><label>Telefone: <br/>
-                                    <input type="number" name="telefone" placeholder="999999999"  onChange={handleChanage}/></label></td>
-                                    <td><label>E-Mail: <br/>
-                                    <input type="email" name="email" placeholder="email@email.com"  onChange={handleChanage}/></label></td>
-                                    </tr>
-                                    <tr>
-                                    <td><input type="submit" value="Salvar" className="btn"/>  </td>
-                                    </tr>
-                                 </table>
-                              </fieldset> 
-                           </form>
-                    </div>
-                     </>):(<>
-                     <div className='conteudoGeral'>
-                           <form onSubmit={handleClickcnpj}>
-                              <fieldset>Dados da empresa:<br/>
-                                 <table>
-                                    <tr>
-                                       <td><label>Nome: <br/>
-                                       <input type="text" name="nome" id="" onChange={handleChanagecnpj}/></label></td>
-                                       <td><label>Razão Social: <br/>
-                                       <input type="text" name="razaoSocial"  onChange={handleChanagecnpj}/></label></td>                                    
-                                       <td><label>CNPJ: <br/>
-                                       <input type="text" name="cnpj" placeholder="Digite o CNPJ da empresa"  onChange={handleChanagecnpj}/></label></td>
-                                    </tr>
-                                 </table>
-
-                              </fieldset>
-                              <fieldset>Endereço:<br/>
-                                 <table>
-                                    <tr>
-                                       <td><label>Logradouro: <br/>
-                                       <input type="text" name="logradouro" placeholder="Digite o Nome da rua"  onChange={handleChanagecnpj}/></label></td>
-                                       <td><label>Numero:<br/> 
-                                       <input type="text" name="numero" placeholder="Digite o numero da casa"  onChange={handleChanagecnpj}/></label></td>
-                                       <td><label>Bairro:<br/> 
-                                       <input type="text" name="bairro" placeholder="Digite O Bairro"  onChange={handleChanagecnpj}/></label></td>
-                                       </tr>
-                                       <tr>
-                                       <td><label>Referência:<br/>
-                                       <input type="text" name="referencia" placeholder="Digite um Ponto de referência"  onChange={handleChanagecnpj}/></label></td>
-                                       <td><label>CEP: <br/>
-                                       <input type="number" name="cep" placeholder="Digite O Cep da cidade"  onChange={handleChanagecnpj}/></label></td>
-                                       <td><label>Cidade: <br/>
-                                       <input type="text" name="cidade" placeholder="Digite a cidade"  onChange={handleChanagecnpj}/></label></td>
-                                       </tr>
-                                       <tr>
-                                       <td><label>Estado: <br/> 
-                                       <input type="text" name="estado" placeholder="Digite a sigla do estado"  onChange={handleChanagecnpj}/></label></td>
-                                    </tr>
-                                 </table>
-                              </fieldset>
-                              <fieldset>Contato:<br/>
-                                 <table>
-                                    <tr>
-                                       <td><label>Prefixo: <br/><input type="number" name="prefixo" placeholder="99" id="" onChange={handleChanagecnpj}/></label></td>
-                                       <td><label>Telefone: <br/><input type="number" name="telefone" placeholder="999999999" id="" onChange={handleChanagecnpj}/></label></td>
-                                       <td><label>E-mail: <br/><input type="email" name="email" placeholder="email@email.com" id="" onChange={handleChanagecnpj}/></label></td>
-                                    </tr>
-                                    <tr>
-                                       <td><input type="submit" value="Salvar" className="btn"/>  </td>
-                                    </tr>
-                                 </table>
-                              </fieldset>
-                           </form>
-                        
-                    </div>
-                     </>)} 
-                     </div>            
+         <div className='blocoAdicional'>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" onClick={(e)=>{setfiltroCadastro("CPF")}}/>
+              <label class="form-check-label" for="flexRadioDefault1">
+                CPF
+              </label>
             </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" onClick={(e)=>{setfiltroCadastro("CNPJ")}}/>
+              <label class="form-check-label" for="flexRadioDefault2">
+                CNPJ
+              </label>
+            </div>
+         </div>
+
+         <div className='blocoRetornoInfo'>
+         
+            {filtroCadastro.length === 3?(<>
+            
+               <form onSubmit={handleClickcpf}>
+                  <table>
+                     <tr>
+                        <td>
+                           <div class="input-group">
+                                <span class="input-group-text">Nome</span>
+                                <input type="text" class="form-control" name='nome' placeholder="Nome do Cliente" onChange={handleChanage} aria-label="Username" aria-describedby="basic-addon1" onChange={handleChanage} />
+                                </div>
+
+                        </td>
+                        <td>
+                           <div class="input-group">
+                              <span class="input-group-text">Sobreome</span>
+                              <input type="text" class="form-control" name='sobrenome' placeholder="Sobrenome do Cliente" onChange={handleChanage} aria-label="Username" aria-describedby="basic-addon1" onChange={handleChanage} />
+                           </div>
+                        </td>
+                     </tr>
+                     <br/>
+                     <tr>
+                        <td>
+                           <div class="input-group">
+                              <span class="input-group-text">CPF</span>
+                              <input type="text" class="form-control" name='cpf' placeholder="000.000.000-00" onChange={handleChanage} aria-label="Username" aria-describedby="basic-addon1" onChange={handleChanage} />
+                           </div>
+                        </td>
+                        <td>
+                           <div class="input-group">
+                              <span class="input-group-text">Data de Nascimento</span>
+                              <input type="date" class="form-control" name="dataNascimento" placeholder="Selecione uma data" onChange={handleChanage} aria-label="Username" aria-describedby="basic-addon1" onChange={handleChanage} />
+                           </div>
+                        </td>
+                     </tr>
+                     <br/>
+                     <tr>
+                        <td>
+                           <div class="input-group">
+                              <span class="input-group-text">Logradouro</span>
+                              <input type="text" class="form-control" name="logradouro" placeholder="" onChange={handleChanage} aria-label="Username" aria-describedby="basic-addon1" onChange={handleChanage} />
+                           </div>
+                        </td>
+                        <td>
+                           <div class="input-group">
+                              <span class="input-group-text">Numero</span>
+                              <input type="text" class="form-control" name="numero" placeholder="" onChange={handleChanage} aria-label="Username" aria-describedby="basic-addon1" onChange={handleChanage} />
+                           </div>
+                        </td>
+                        <td>
+                           <div class="input-group">
+                              <span class="input-group-text">Bairro</span>
+                              <input type="text" class="form-control"  name="bairro" placeholder="" onChange={handleChanage} aria-label="Username" aria-describedby="basic-addon1" onChange={handleChanage} />
+                           </div>
+                        </td>
+                     </tr>
+                     <br/>
+                     <tr>
+                        <td>
+                           <div class="input-group">
+                              <span class="input-group-text">Referência</span>
+                              <input type="text" class="form-control" name="referencia" placeholder="" onChange={handleChanage} aria-label="Username" aria-describedby="basic-addon1" onChange={handleChanage} />
+                           </div>
+                        </td>
+                        <td>
+                           <div class="input-group">
+                              <span class="input-group-text">Cep</span>
+                              <input type="text" class="form-control" name="cep" placeholder="00000000" onChange={handleChanage} aria-label="Username" aria-describedby="basic-addon1" onChange={handleChanage} />
+                           </div>
+                        </td>
+                        <td>
+                           <div class="input-group">
+                              <span class="input-group-text">Cidade</span>
+                              <input type="text" class="form-control" name="cidade" placeholder="" onChange={handleChanage} aria-label="Username" aria-describedby="basic-addon1" onChange={handleChanage} />
+                           </div>
+                        </td>
+                        <td>
+                           <div class="input-group">
+                              <span class="input-group-text">Estado</span>
+                              <input type="text" class="form-control" name="estado" placeholder="Nome do serviço" onChange={handleChanage} aria-label="Username" aria-describedby="basic-addon1" onChange={handleChanage} />
+                           </div>
+                        </td>
+                     </tr>
+                     <br/>
+                     <tr>
+                        <td>
+                         <div class="input-group">
+                           <span class="input-group-text">Prefixo</span>
+                           <input type="number" class="form-control" name="prefixo" placeholder="00" onChange={handleChanage} aria-label="Username" aria-describedby="basic-addon1" onChange={handleChanage} />
+                           </div>
+                        </td>
+                        <td>
+                           <div class="input-group">
+                           <span class="input-group-text">Telefone</span>
+                           <input type="number" class="form-control" name="telefone" placeholder="000000000" onChange={handleChanage} aria-label="Username" aria-describedby="basic-addon1" onChange={handleChanage} />
+                           </div>
+                        </td>
+                        <td>
+                           <div class="input-group">
+                           <span class="input-group-text">E-Mail</span>
+                           <input type="email" class="form-control" name="email" placeholder="Email Válido" onChange={handleChanage} aria-label="Username" aria-describedby="basic-addon1" onChange={handleChanage} />
+                           </div>
+                        </td>
+                     </tr>
+                     <br/>
+                     <tr>
+                        <td>
+                           <button type="submit" class="btn btn-success">Salvar</button>
+                        </td>
+                     </tr>
+                  </table>
+               </form>
+            </>):(<></>)}
+
+            {filtroCadastro.length === 4?(<>
+            
+            <form onSubmit={handleChanagecnpj}>
+               <table>
+                  <tr>
+                     <td>
+                        <div class="input-group">
+                           <span class="input-group-text">Nome</span>
+                           <input type="text" class="form-control" name='nome' placeholder="Nome da Empresa" onChange={handleChanagecnpj} aria-label="Username" aria-describedby="basic-addon1" onChange={handleChanage} />
+                        </div>
+                     </td>
+                     <td>
+                        <div class="input-group">
+                           <span class="input-group-text">Razão Social</span>
+                           <input type="text" class="form-control" name='razaoSocial' placeholder="Razão Social da Empresa" onChange={handleChanagecnpj} aria-label="Username" aria-describedby="basic-addon1" onChange={handleChanage} />
+                        </div>
+                     </td>
+                     <td>
+                        <div class="input-group">
+                           <span class="input-group-text">CNPJ</span>
+                           <input type="text" class="form-control" name='cnpj' placeholder=" 99.999.999/9999-99" onChange={handleChanagecnpj} aria-label="Username" aria-describedby="basic-addon1" onChange={handleChanage} />
+                        </div>
+                     </td>
+                  </tr>
+                  <br/>
+                  <tr>
+                     <td>
+                        <div class="input-group">
+                           <span class="input-group-text">Logradouro</span>
+                           <input type="text" class="form-control" name="logradouro" placeholder="" onChange={handleChanagecnpj} aria-label="Username" aria-describedby="basic-addon1" onChange={handleChanage} />
+                        </div>
+                     </td>
+                     <td>
+                        <div class="input-group">
+                           <span class="input-group-text">Numero</span>
+                           <input type="text" class="form-control" name="numero" placeholder="" onChange={handleChanagecnpj} aria-label="Username" aria-describedby="basic-addon1" onChange={handleChanage} />
+                        </div>
+                     </td>
+                     <td>
+                        <div class="input-group">
+                           <span class="input-group-text">Bairro</span>
+                           <input type="text" class="form-control"  name="bairro" placeholder="" onChange={handleChanagecnpj} aria-label="Username" aria-describedby="basic-addon1" onChange={handleChanage} />
+                        </div>
+                     </td>
+                  </tr>
+                  <br/>
+                  <tr>
+                     <td>
+                        <div class="input-group">
+                           <span class="input-group-text">Referência</span>
+                           <input type="text" class="form-control" name="referencia" placeholder="" onChange={handleChanagecnpj} aria-label="Username" aria-describedby="basic-addon1" onChange={handleChanage} />
+                        </div>
+                     </td>
+                     <td>
+                        <div class="input-group">
+                           <span class="input-group-text">Cep</span>
+                           <input type="text" class="form-control" name="cep" placeholder="00000000" onChange={handleChanagecnpj} aria-label="Username" aria-describedby="basic-addon1" onChange={handleChanage} />
+                        </div>
+                     </td>
+                     <td>
+                        <div class="input-group">
+                           <span class="input-group-text">Cidade</span>
+                           <input type="text" class="form-control" name="cidade" placeholder="" onChange={handleChanagecnpj} aria-label="Username" aria-describedby="basic-addon1" onChange={handleChanage} />
+                        </div>
+                     </td>
+                     <td>
+                        <div class="input-group">
+                           <span class="input-group-text">Estado</span>
+                           <input type="text" class="form-control" name="estado" placeholder="Nome do serviço" onChange={handleChanagecnpj} aria-label="Username" aria-describedby="basic-addon1" onChange={handleChanage} />
+                        </div>
+                     </td>
+                  </tr>
+                  <br/>
+                  <tr>
+                     <td>
+                      <div class="input-group">
+                        <span class="input-group-text">Prefixo</span>
+                        <input type="number" class="form-control" name="prefixo" placeholder="00" onChange={handleChanagecnpj} aria-label="Username" aria-describedby="basic-addon1" onChange={handleChanage} />
+                        </div>
+                     </td>
+                     <td>
+                        <div class="input-group">
+                        <span class="input-group-text">Telefone</span>
+                        <input type="number" class="form-control" name="telefone" placeholder="000000000" onChange={handleChanagecnpj} aria-label="Username" aria-describedby="basic-addon1" onChange={handleChanage} />
+                        </div>
+                     </td>
+                     <td>
+                        <div class="input-group">
+                        <span class="input-group-text">E-Mail</span>
+                        <input type="email" class="form-control" name="email" placeholder="Email Válido" onChange={handleChanagecnpj} aria-label="Username" aria-describedby="basic-addon1" onChange={handleChanage} />
+                        </div>
+                     </td>
+                  </tr>
+                  <br/>
+                  <tr>
+                     <td>
+                        <button type="submit" class="btn btn-success">Salvar</button>
+                     </td>
+                  </tr>
+               </table>
+            </form>
+         </>):(<></>)}
+
+         </div>
     
     </>)
 }

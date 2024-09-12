@@ -1,16 +1,17 @@
 import '../AdmGlobal.css'
 import './AdmHome.css'
+import 'bootstrap/dist/css/bootstrap.min.css'
 import NavAdm from '../../../Component/NavAdm/NavAdm'
 import { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 
 
 function AdmHome() {
 
-    const baseUrl = "http://34.135.105.123:8080"
-  //const baseUrl = "http://localhost:8080"
+    //const baseUrl = "http://34.135.105.123:8080"
+  const baseUrl = "http://localhost:8080"
     const[seletorInterno, setseletorInterno] = useState('')
     const [relatorioDiadio, setrelatorioDiadio] = useState([]);
-    const [relatorioMensal, setrelatorioMensal] = useState([]);
     useEffect(()=>{
         fetch(`${baseUrl}/relatorios/BuscarRelatorioDiario`, 
             {
@@ -28,17 +29,13 @@ function AdmHome() {
 
     return(
         <>
-            <div className="admBoxGeral">
-                
-                <div className="admBoxNav">
-                    <NavAdm></NavAdm>
-                </div>
+        <div className='blocoNav'><NavAdm></NavAdm></div>
 
-                <div className="admSession">
-                <div className='retornoInfoRelatorio'>
-                    {relatorioDiadio ?(<>
-                        {relatorioDiadio.map((data, i)=>{
+        <div className='blocoRetornoInfo'>
+        {relatorioDiadio ?(<>
+                                    {relatorioDiadio.map((data, i)=>{
                                         return(<>
+                                        <div className='retornoInfoRelatorio'>
                                             <div className='retornoInfoResumo' key={i}>
                                                 <div className='sessaoValor'>
                                                     <div className='icone iconeCartao '></div><h5>Crédito: {data.totalVendasCredito}</h5>
@@ -63,10 +60,8 @@ function AdmHome() {
                                             </div>
                                             <div className='retornoInfoResumotabela'>
                                                 <div className='seletorrelatorio'>
-                                                    <span><input  type='radio' value="vendas" onClick={(e)=>{setseletorInterno(e.target.value)}}/>Vendas</span>
-                                                    <span><input  type='radio' value="debitos" onClick={(e)=>{setseletorInterno(e.target.value)}}/>Debitos</span>
+                                                <h3>Serviços Realizados</h3>
                                                 </div>
-                                                {seletorInterno.length === 6?(<>
                                                     <div className='retornoInfotabela'>
                                                         <table>
                                                             <tr>
@@ -79,7 +74,7 @@ function AdmHome() {
                                                                 <td>Parcelas</td>
                                                                 <td>Forma Pagamento</td>
                                                             </tr>
-                                                            {data.pedidos.map((data1,i)=>{
+                                                            {data.vendasRealizadas.map((data1,i)=>{
                                                                 return(<>
                                                                     <tr key={i}>
                                                                     <td>{data1.nomeCLiente}</td>
@@ -95,22 +90,8 @@ function AdmHome() {
                                                             
                                                         </table>
                                                     </div>
-                                                </>):(<>
-                                                    <div className='retornoInfotabela'>
-                                                        <table>
-                                                            <tr>
-                                                                <td>Razão Social</td>
-                                                                <td>CNPJ</td>
-                                                                <td>Valor</td>
-                                                                <td>Parcelas</td>
-                                                                <td>Data Emissão</td>
-                                                                <td>Data Vencimento</td>
-                                                            </tr>
-                                                        </table>
-                                                    </div>
-                                                </>)}
-                                                
                                             </div>
+                                        </div>
                                         </>)
                                     })}
                     </>):(<>
@@ -172,12 +153,9 @@ function AdmHome() {
                                     </div>
 
                                 </div>
-                    </>)}
-                                                                   
-                            </div>
-                </div>
-            </div>
-        </>)
+                    </>)}                   
+        </div>
+        </>)        
 }
 
 export default AdmHome

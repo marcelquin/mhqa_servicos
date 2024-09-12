@@ -1,54 +1,33 @@
 import { Link } from "react-router-dom"
 import './NavAdm.css'
-
+import 'bootstrap/dist/css/bootstrap.min.css'
 
 function NavAdm() {
     return(
         <>
-            <table>
-                <tr className="tittle">
-                    <td>Cliente</td>
-                </tr>
-                <tr>
-                    <Link to={"/ClienteCadastrar"}><td><span>CADASTRAR</span></td></Link>
-                </tr>
-                <tr>
-                    <Link to={"/AdmClienteGerencia"}><td><span>Gerenciar</span></td></Link>
-                </tr>
-                <tr className="tittle">
-                    <td>SERVIÇO</td>
-                </tr>
-                <tr>
-                    <Link to={"/ServicoCadastrar"}><td><span>CADASTRAR</span></td></Link>
-                </tr>
-                <tr>
-                    <Link to={"/AdmServicoGerencia"}><td><span>Gerenciar</span></td></Link>
-                </tr>
-                <tr className="tittle">
-                    <td>ORDEM DE SERVIÇO</td>
-                </tr>
-                <tr>
-                    <Link to={"/AdmOrdemServicoGerencia"}><td><span>Gerenciar</span></td></Link>
-                </tr>
-                <tr className="tittle">
-                    <td>PROPRIETÁRIO</td>
-                </tr>
-                <tr>
-                    <Link to={"/ProprietarioCadastrar"}><td><span>CADASTRAR</span></td></Link>
-                </tr>
-                <tr>
-                    <Link to={"/ProprietarioGerencia"}><td><span>Gerenciar</span></td></Link>
-                </tr>
-                <tr className="tittle">
-                    <td>RELATÓRIOS</td>
-                </tr>
-                <tr>
-                    <Link to={"/DebitoCadastrar"}><td><span>Débitos</span></td></Link>
-                </tr>
-                <tr>
-                    <Link to={"/RelatorioGerencia"}><td><span>Gerenciar</span></td></Link>
-                </tr>
-            </table>
+           <ul class="nav nav-underline">
+                <li class="nav-item">
+                    <Link  to={"/Adm"}class="nav-link active" aria-current="page" href="#">Home Adm</Link>
+                </li>
+                <li class="nav-item">
+                    <Link to={"/AdmProprietario"} class="nav-link" href="#">Proprietario</Link>
+                </li>
+                <li class="nav-item">
+                    <Link to={"/AdmCliente"} class="nav-link" href="#">Cliente</Link>
+                </li>              
+                <li class="nav-item">
+                    <Link to={"/AdmServico"} class="nav-link" href="#">Serviços</Link>
+                </li>
+                <li class="nav-item">
+                    <Link to={"/AdmOrdemServicoGerencia"} class="nav-link" href="#">Serviços Realizados</Link>
+                </li>
+                <li class="nav-item">
+                    <Link to={"/DebitoCadastrar"} class="nav-link" href="#">Cadastrar Boletos</Link>
+                </li>
+                <li class="nav-item">
+                    <Link to={"/AdmFinanceiro"} class="nav-link" href="#">Financeiro</Link>
+                </li>
+            </ul>
         </>)
     }
     export default NavAdm

@@ -1,24 +1,22 @@
-import './Relatorio.css';
+import './FinanceiroAdm.css';
 import '../AdmGlobal.css'
 import NavAdm from '../../../Component/NavAdm/NavAdm'
 import { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom';
 
 
 function RelatorioAdm() {
 
-    const baseUrl = "http://34.135.105.123:8080"
-  //const baseUrl = "http://localhost:8080"
+    //const baseUrl = "http://34.135.105.123:8080"
+    const baseUrl = "http://localhost:8080"
     const[seletorInterno, setseletorInterno] = useState('')
     const[seletor, setSeletor] = useState('')
-    const[diaReferencia, setDiaReferencia] = useState('')
-    const[mesReferencia, setMesReferencia] = useState('')
-    const[anoReferencia, setAnoReferencia] = useState('')
     const [relatorioDiadio, setrelatorioDiadio] = useState([]);
     const [relatorioMensal, setrelatorioMensal] = useState([]);
     const [relatorioAnual, setrelatorioAnual] = useState([]);
 
     useEffect(()=>{
-        fetch(`${baseUrl}/relatorios/BuscarRelatorioDiario`, 
+        fetch(`${baseUrl}/relatorios/BuscarRelatorioDiario`,
             {
                 method:'GET',
                 headers:{
@@ -31,7 +29,7 @@ function RelatorioAdm() {
             })
             .catch(err => console.log(err))
     }, [])
-
+    
     useEffect(()=>{
         fetch(`${baseUrl}/relatorios/BuscarRelatorioMensal`, 
             {
@@ -46,7 +44,7 @@ function RelatorioAdm() {
             })
             .catch(err => console.log(err))
     }, [])
-
+    
     useEffect(()=>{
         fetch(`${baseUrl}/relatorios/BuscarRelatorioAnual`, 
             {
@@ -62,94 +60,33 @@ function RelatorioAdm() {
             .catch(err => console.log(err))
     }, [])
 
-    const buscarRelatorioDiario=async (e)=>{
-        try{
-            await fetch(`${baseUrl}/realtorio/BuscarRelatorioPordiaReferencia?diaReferencia=${diaReferencia}`, 
-            {
-                method:'GET',
-                headers:{
-                    'content-type': 'application/json',
-                },
-            })
-            .then((resp)=> resp.json())
-            .then((data)=> {
-                setrelatorioDiadio(data)
-            })
-        }catch (err){
-          console.log("erro")
-        }
-      }
-
-      const buscarRelatorioMensal=async (e)=>{
-        try{
-             await fetch(`${baseUrl}/realtorio/BuscarRelatorioPorMesReferencia?mesReferencia=${mesReferencia}`, 
-                {
-                    method:'GET',
-                    headers:{
-                        'content-type': 'application/json',
-                    },
-                })
-                .then((resp)=> resp.json())
-                .then((data)=> {
-                    setrelatorioMensal(data)
-                })
-        }catch (err){
-          console.log("erro")
-        }
-      }
-
-      const buscarRelatorioAnual=async (e)=>{
-        try{
-            await fetch(`${baseUrl}/realtorio/BuscarRelatorioPorAnoReferencia?anoReferencia=${anoReferencia}`, 
-                {
-                    method:'GET',
-                    headers:{
-                        'content-type': 'application/json',
-                    },
-                })
-                .then((resp)=> resp.json())
-                .then((data)=> {
-                    setrelatorioAnual(data)
-                })
-        }catch (err){
-          console.log("erro")
-        }
-      }
-
 
     return(<>
-            <div className="admBoxGeral">
-                
-                <div className="admBoxNav">
-                    <NavAdm></NavAdm>
+
+            <div className='blocoAdicional'>
+
+                <div class="form-check">
+                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" onClick={(e)=>{setseletorInterno("dia")}}/>
+                <label class="form-check-label" for="flexRadioDefault1">
+                    Diario
+                </label>
                 </div>
+                <div class="form-check">
+                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" onClick={(e)=>{setseletorInterno("mensal")}}/>
+                <label class="form-check-label" for="flexRadioDefault2">
+                    Mensal
+                </label>
+                </div>
+                <div class="form-check">
+                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" onClick={(e)=>{setseletorInterno("anual")}}/>
+                <label class="form-check-label" for="flexRadioDefault2">
+                    Anual
+                </label>
+                </div>
+            </div>
+            <div className='blocoRetornoInfo'>
 
-                <div className="admSession">
-
-                    <div className='relatorioBlocoGeral'>
-                        <div className='seletor'>
-                            <input type='radio' value="dia" onClick={(e)=>{setSeletor(e.target.value)}} />Diario
-                            <input type='radio' value="mensal" onClick={(e)=>{setSeletor(e.target.value)}} />Mensal
-                            <input type='radio' value="anual" onClick={(e)=>{setSeletor(e.target.value)}} />Anual
-                            <br/><br/>
-                            {seletor.length === 3?(<>
-                                <div className='buscaPersonalizada'>
-                                    <form>
-                                        <table>
-                                            <tr>
-                                                <td>
-                                                    Dia de referencia:
-                                                    <input type='number' name='diaReferencia' placeholder='Digite o dia para busca' />
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <input type='submit' value="Buscar"/>
-                                                </td>
-                                            </tr>
-                                        </table>
-                                    </form>
-                                </div>
+            {seletorInterno.length === 3?(<>
                                 {relatorioDiadio ?(<>
                                     {relatorioDiadio.map((data, i)=>{
                                         return(<>
@@ -178,11 +115,20 @@ function RelatorioAdm() {
                                             </div>
                                             <div className='retornoInfoResumotabela'>
                                                 <div className='seletorrelatorio'>
-                                                    <span><input  type='radio' value="vendas" onClick={(e)=>{setseletorInterno(e.target.value)}}/>Vendas</span>
-                                                    <span><input  type='radio' value="debitos" onClick={(e)=>{setseletorInterno(e.target.value)}}/>Debitos</span>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" onClick={(e)=>{setSeletor("vendas")}}/>
+                                                    <label class="form-check-label" for="flexRadioDefault1">
+                                                        Serviços Executados
+                                                    </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" onClick={(e)=>{setSeletor("debitos")}}/>
+                                                    <label class="form-check-label" for="flexRadioDefault2">
+                                                        Debitos
+                                                    </label>
                                                 </div>
-                                                {seletorInterno.length === 6?(<>
-                                                    <div className='retornoInfotabela'>
+                                                {seletor.length ===6?(<>
+                                                    <div className='blocoRetornoInfo'>
                                                         <table>
                                                             <tr>
                                                                 <td>Cliente</td>
@@ -194,7 +140,7 @@ function RelatorioAdm() {
                                                                 <td>Parcelas</td>
                                                                 <td>Forma Pagamento</td>
                                                             </tr>
-                                                            {data.pedidos.map((data1,i)=>{
+                                                            {data.vendasRealizadas.map((data1,i)=>{
                                                                 return(<>
                                                                     <tr key={i}>
                                                                     <td>{data1.nomeCLiente}</td>
@@ -209,22 +155,39 @@ function RelatorioAdm() {
                                                                 </>)})}
                                                             
                                                         </table>
-                                                    </div>
-                                                </>):(<>
-                                                    <div className='retornoInfotabela'>
-                                                        <table>
-                                                            <tr>
-                                                                <td>Razão Social</td>
-                                                                <td>CNPJ</td>
-                                                                <td>Valor</td>
-                                                                <td>Parcelas</td>
-                                                                <td>Data Emissão</td>
-                                                                <td>Data Vencimento</td>
-                                                            </tr>
-                                                        </table>
-                                                    </div>
-                                                </>)}
+                                                    </div> 
                                                 
+                                                </>):(<></>)}
+                                                {seletor.length ===7?(<>
+                                                
+                                                    <div className='blocoRetornoInfo'>
+                                                    <table>
+                                                                    <tr>
+                                                                        <td>Razão Social</td>
+                                                                        <td>CNPJ</td>
+                                                                        <td>Valor Total</td>
+                                                                        <td>Valor Parcela</td>
+                                                                        <td>Parcela Atual</td>
+                                                                        <td>Data Vencimento</td>
+                                                                        <td>Status Pagamento</td>
+                                                                    </tr>
+                                                                    {data.boletos.map((data2, i)=>{return(<>
+                                                                        <tr>
+                                                                            <td>{data2.empresa}</td>
+                                                                            <td>{data2.cnpj}</td>
+                                                                            <td>{data2.valorTotal}</td>
+                                                                            <td>{data2.valorParcela}</td>
+                                                                            <td>{data2.parcelaAtual}</td>
+                                                                            <td>{data2.dataVencimento}</td>
+                                                                            <td>{data2.statusPagamento}</td>
+                                                                            <td><Link to={`/pagamento/${data2.id}`}>Informar Pagamento</Link></td>
+                                                                        </tr>
+                                                                    </>)})}
+                                                                </table>
+                                                    </div>
+                                                </>):(<></>)}
+                                                </div>
+                                                     
                                             </div>
                                         </div>
                                         </>)
@@ -292,24 +255,8 @@ function RelatorioAdm() {
                                 </>):(<></>)}
                                 
 
-                                {seletor.length === 6?(<>
-                                <div className='buscaPersonalizada'>
-                                    <form>
-                                        <table>
-                                            <tr>
-                                                <td>
-                                                    Mês de referencia:
-                                                    <input type='number' name='mesReferencia' placeholder='Digite o mês para busca' />
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <input type='submit' value="Buscar"/>
-                                                </td>
-                                            </tr>
-                                        </table>
-                                    </form>
-                                </div>
+            
+                                {seletorInterno.length === 6?(<>
                                 {relatorioMensal ?(<>
                                     {relatorioMensal.map((data, i)=>{
                                         return(<>
@@ -338,11 +285,20 @@ function RelatorioAdm() {
                                             </div>
                                             <div className='retornoInfoResumotabela'>
                                                 <div className='seletorrelatorio'>
-                                                    <span><input  type='radio' value="vendas" onClick={(e)=>{setseletorInterno(e.target.value)}}/>Vendas</span>
-                                                    <span><input  type='radio' value="debitos" onClick={(e)=>{setseletorInterno(e.target.value)}}/>Debitos</span>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" onClick={(e)=>{setSeletor("vendas")}}/>
+                                                    <label class="form-check-label" for="flexRadioDefault1">
+                                                        Serviços Executados
+                                                    </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" onClick={(e)=>{setSeletor("debitos")}}/>
+                                                    <label class="form-check-label" for="flexRadioDefault2">
+                                                        Debitos
+                                                    </label>
                                                 </div>
-                                                {seletorInterno.length === 6?(<>
-                                                    <div className='retornoInfotabela'>
+                                                {seletor.length ===6?(<>
+                                                    <div className='blocoRetornoInfo'>
                                                         <table>
                                                             <tr>
                                                                 <td>Cliente</td>
@@ -354,7 +310,7 @@ function RelatorioAdm() {
                                                                 <td>Parcelas</td>
                                                                 <td>Forma Pagamento</td>
                                                             </tr>
-                                                            {data.pedidos.map((data1,i)=>{
+                                                            {data.vendasRealizadas.map((data1,i)=>{
                                                                 return(<>
                                                                     <tr key={i}>
                                                                     <td>{data1.nomeCLiente}</td>
@@ -369,22 +325,39 @@ function RelatorioAdm() {
                                                                 </>)})}
                                                             
                                                         </table>
-                                                    </div>
-                                                </>):(<>
-                                                    <div className='retornoInfotabela'>
-                                                        <table>
-                                                            <tr>
-                                                                <td>Razão Social</td>
-                                                                <td>CNPJ</td>
-                                                                <td>Valor</td>
-                                                                <td>Parcelas</td>
-                                                                <td>Data Emissão</td>
-                                                                <td>Data Vencimento</td>
-                                                            </tr>
-                                                        </table>
-                                                    </div>
-                                                </>)}
+                                                    </div> 
                                                 
+                                                </>):(<></>)}
+                                                {seletor.length ===7?(<>
+                                                
+                                                    <div className='blocoRetornoInfo'>
+                                                    <table>
+                                                                    <tr>
+                                                                        <td>Razão Social</td>
+                                                                        <td>CNPJ</td>
+                                                                        <td>Valor Total</td>
+                                                                        <td>Valor Parcela</td>
+                                                                        <td>Parcela Atual</td>
+                                                                        <td>Data Vencimento</td>
+                                                                        <td>Status Pagamento</td>
+                                                                    </tr>
+                                                                    {data.boletos.map((data2, i)=>{return(<>
+                                                                        <tr>
+                                                                            <td>{data2.empresa}</td>
+                                                                            <td>{data2.cnpj}</td>
+                                                                            <td>{data2.valorTotal}</td>
+                                                                            <td>{data2.valorParcela}</td>
+                                                                            <td>{data2.parcelaAtual}</td>
+                                                                            <td>{data2.dataVencimento}</td>
+                                                                            <td>{data2.statusPagamento}</td>
+                                                                            <td><Link to={`/pagamento/${data2.id}`}>Informar Pagamento</Link></td>
+                                                                        </tr>
+                                                                    </>)})}
+                                                                </table>
+                                                    </div>
+                                                </>):(<></>)}
+                                                </div>
+                                                     
                                             </div>
                                         </div>
                                         </>)
@@ -451,25 +424,7 @@ function RelatorioAdm() {
                     </>)}                   
                                 </>):(<></>)}
 
-
-                                {seletor.length === 5?(<>
-                                <div className='buscaPersonalizada'>
-                                    <form>
-                                        <table>
-                                            <tr>
-                                                <td>
-                                                    Ano de referencia:
-                                                    <input type='number' name='anoReferencia' placeholder='Digite o ano para busca' />
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <input type='submit' value="Buscar"/>
-                                                </td>
-                                            </tr>
-                                        </table>
-                                    </form>
-                                </div>
+                                {seletorInterno.length === 5?(<>
                                 {relatorioAnual ?(<>
                                     {relatorioAnual.map((data, i)=>{
                                         return(<>
@@ -498,11 +453,20 @@ function RelatorioAdm() {
                                             </div>
                                             <div className='retornoInfoResumotabela'>
                                                 <div className='seletorrelatorio'>
-                                                    <span><input  type='radio' value="vendas" onClick={(e)=>{setseletorInterno(e.target.value)}}/>Vendas</span>
-                                                    <span><input  type='radio' value="debitos" onClick={(e)=>{setseletorInterno(e.target.value)}}/>Debitos</span>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" onClick={(e)=>{setSeletor("vendas")}}/>
+                                                    <label class="form-check-label" for="flexRadioDefault1">
+                                                        Serviços Executados
+                                                    </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" onClick={(e)=>{setSeletor("debitos")}}/>
+                                                    <label class="form-check-label" for="flexRadioDefault2">
+                                                        Debitos
+                                                    </label>
                                                 </div>
-                                                {seletorInterno.length === 6?(<>
-                                                    <div className='retornoInfotabela'>
+                                                {seletor.length ===6?(<>
+                                                    <div className='blocoRetornoInfo'>
                                                         <table>
                                                             <tr>
                                                                 <td>Cliente</td>
@@ -514,7 +478,7 @@ function RelatorioAdm() {
                                                                 <td>Parcelas</td>
                                                                 <td>Forma Pagamento</td>
                                                             </tr>
-                                                            {data.pedidos.map((data1,i)=>{
+                                                            {data.vendasRealizadas.map((data1,i)=>{
                                                                 return(<>
                                                                     <tr key={i}>
                                                                     <td>{data1.nomeCLiente}</td>
@@ -529,22 +493,39 @@ function RelatorioAdm() {
                                                                 </>)})}
                                                             
                                                         </table>
-                                                    </div>
-                                                </>):(<>
-                                                    <div className='retornoInfotabela'>
-                                                        <table>
-                                                            <tr>
-                                                                <td>Razão Social</td>
-                                                                <td>CNPJ</td>
-                                                                <td>Valor</td>
-                                                                <td>Parcelas</td>
-                                                                <td>Data Emissão</td>
-                                                                <td>Data Vencimento</td>
-                                                            </tr>
-                                                        </table>
-                                                    </div>
-                                                </>)}
+                                                    </div> 
                                                 
+                                                </>):(<></>)}
+                                                {seletor.length ===7?(<>
+                                                
+                                                    <div className='blocoRetornoInfo'>
+                                                    <table>
+                                                                    <tr>
+                                                                        <td>Razão Social</td>
+                                                                        <td>CNPJ</td>
+                                                                        <td>Valor Total</td>
+                                                                        <td>Valor Parcela</td>
+                                                                        <td>Parcela Atual</td>
+                                                                        <td>Data Vencimento</td>
+                                                                        <td>Status Pagamento</td>
+                                                                    </tr>
+                                                                    {data.boletos.map((data2, i)=>{return(<>
+                                                                        <tr>
+                                                                            <td>{data2.empresa}</td>
+                                                                            <td>{data2.cnpj}</td>
+                                                                            <td>{data2.valorTotal}</td>
+                                                                            <td>{data2.valorParcela}</td>
+                                                                            <td>{data2.parcelaAtual}</td>
+                                                                            <td>{data2.dataVencimento}</td>
+                                                                            <td>{data2.statusPagamento}</td>
+                                                                            <td><Link to={`/pagamento/${data2.id}`}>Informar Pagamento</Link></td>
+                                                                        </tr>
+                                                                    </>)})}
+                                                                </table>
+                                                    </div>
+                                                </>):(<></>)}
+                                                </div>
+                                                     
                                             </div>
                                         </div>
                                         </>)
@@ -587,8 +568,7 @@ function RelatorioAdm() {
                                                         <td>Itens</td>
                                                         <td>Valor</td>
                                                         <td>Data Venda</td>
-                                                        <td>Parcelas</td>
-                                                        <td>Forma Pagamento</td>
+                                                        <td>Data Pagamento</td>
                                                     </tr>
                                                 </table>
                                             </div>
@@ -612,10 +592,7 @@ function RelatorioAdm() {
                     </>)}                   
                                 </>):(<></>)}
 
-                        </div>
-                    </div>
-                </div>
-            </div>           
+            </div>  
         </>)
 }
 

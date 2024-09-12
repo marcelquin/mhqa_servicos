@@ -8,8 +8,8 @@ import { Link } from 'react-router-dom';
 
 export default function ProietarioAdmGerencia()
 {
-  const baseUrl = "http://34.135.105.123:8080"
-  //const baseUrl = "http://localhost:8080"
+  //const baseUrl = "http://34.135.105.123:8080"
+  const baseUrl = "http://localhost:8080"
     const[APIData, setAPIData]= useState([]);
 
     useEffect(() => {
@@ -23,15 +23,10 @@ export default function ProietarioAdmGerencia()
 
 
     return(<>
-        <div className="admBoxGeral">
-                
-                <div className="admBoxNav">
-                    <NavAdm></NavAdm>
-                </div>
-                <div className='conteudoGeral'>
-                  <div className='conteudo'>
 
-                  {APIData.map((data, i)=>{
+      <div className='blocoRetornoInfo'>
+          
+        {APIData.map((data, i)=>{
                       return(<>
                         <div className='cartaoProprietario'>
                 
@@ -65,17 +60,6 @@ export default function ProietarioAdmGerencia()
                       
                       </>)
                     })}
-
-
-
-                  
-
-                    
-                    
-                  </div>
-                </div>
-         </div>
-                    
-    
+        </div>   
     </>)
 }
